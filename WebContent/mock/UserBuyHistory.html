@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>ユーザー情報更新完了</title>
+    <title>購入履歴一覧</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -36,7 +36,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">"WebContent/mock/UserupdateResult.html"
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -47,9 +47,6 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"></span></a>
   			</li>
-
-
-
 
       </ul>
 
@@ -68,16 +65,60 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
- <h3 class="text-center" style= "margin-top: 200px; margin-bottom: 100px">入力内容確認</h3>
 
- <span class="text-center" style= "margin-top: 300px">名前</span><p class="text-center">？？</p>
- <span class="text-center" style= "margin-top: 200px">ログインID</span><p class="text-center">？？</p>
- <span class="text-center" style= "margin-top: 200px">住所</span><p class="text-center">？？</p>
-<p  class="text-center" style= "margin-top: 40px">上記内容で更新しました</p>
+  <div class="col-md-2 offset-md-10">
 
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px">ユーザー情報へ</button>
+
+
+  <button type="button" class="btn btn-secondary" style="margin-top: 100px">ユーザー情報へ戻る</button>
+   </div>
+
+
+
+
+ <h3 class="text-center" style= "margin-top: 100px; margin-bottom: 100px">購入履歴一覧</h3>
+
+<div class="container">
+ <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">購入日時</th>
+      <th scope="col">金額</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="UserBuyHistoryDetail?buy_id=？" class="btn-floating btn waves-effect waves-light ">詳細<i class="far fa-hand-point-right"></i></a></th>
+      <td>2019-01-22 22:29</td>
+      <td>9990円</td>
+
+
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+
+    </tr>
+  </tbody>
+
+
+</table>
+</div>
+
 
 
 
 </body>
 </html>
+
+
+
