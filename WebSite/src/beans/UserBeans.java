@@ -1,7 +1,7 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class UserBeans implements Serializable{
 
@@ -15,7 +15,20 @@ public class UserBeans implements Serializable{
 
 
 
-
+	//DAOで使うコンストラクタ
+	public UserBeans(String loginId, String name) {
+		this.loginId=loginId;
+		this.name=name;
+	}
+	public UserBeans(int userId,String loginId,String name,String address,String password,Date createDateData,Date updateDateData) {
+		this.userId=userId;
+		this.loginId=loginId;
+		this.name=name;
+		this.address=address;
+		this.password=password;
+		this.createDate=createDateData;
+		this.updateDate=updateDateData;
+	}
 	public int getUserId() {
 		return userId;
 	}
