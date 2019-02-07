@@ -5,13 +5,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BuyBeans implements Serializable{
-	
+
 	private int buyId;
 	private int userId;
 	private int totalPrice;
 	private Date createDate;
-	
-	
+
+
+	public BuyBeans(int buyId, int userId, int totalPrice, Date createDate) {
+		this.buyId=buyId;
+		this.userId=userId;
+		this.totalPrice=totalPrice;
+		this.createDate=createDate;
+	}
 	public int getBuyId() {
 		return buyId;
 	}
@@ -36,7 +42,7 @@ public class BuyBeans implements Serializable{
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
-	
+
+
 
 }

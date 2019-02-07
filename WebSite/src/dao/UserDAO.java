@@ -66,18 +66,18 @@ public class UserDAO {
  * @param id
  * @return
  */
-	 public UserBeans referUser(String id) {
+	 public UserBeans referUser(String userId) {
 	        Connection conn = null;
 	        try {
 	            // データベースへ接続
 	            conn = DBManager.getConnection();
 
 	            // SELECT文を準備
-	            String sql = "SELECT * FROM user WHERE id = ?;";
+	            String sql = "SELECT * FROM user WHERE user_id = ?;";
 
 	             // SELECTを実行し、結果表を取得
 	            PreparedStatement pStmt = conn.prepareStatement(sql);
-	            pStmt.setString(1, id);
+	            pStmt.setString(1, userId);
 
 
 	            ResultSet rs = pStmt.executeQuery();
@@ -132,7 +132,7 @@ public class UserDAO {
 
 
 				//insert文
-				String sql ="INSERT INTO user(login_Id,password,name,birth_date,create_date,up_date)VALUES(?,?,?,?,now(),now())";
+				String sql ="INSERT INTO user(login_Id,name,address,password,create_date,up_date)VALUES(?,?,?,?,now(),now())";
 				//インサート実行
 				 // SELECTを実行し、結果表を取得
 		        PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -210,22 +210,23 @@ public class UserDAO {
 		    }
 
 
-		    public void updateUser(String id,String loginId,String name,String password) {
+		    public void updateUser(String userId,String loginId,String name,String address,String password) {
 		        Connection conn=null;
 		    	try {
 		    		//connectDB
 		    		conn=DBManager.getConnection();
 
 		    		//update文
-		    		String sql ="UPDATE user SET password=?,name=? , birth_date=? WHERE id=?;";
+		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,password=? WHERE id=?;";
 		    		//インサート実行
 		    		 // SELECTを実行し、結果表を取得
 		            PreparedStatement pStmt = conn.prepareStatement(sql);
 
 		            pStmt.setString(1, loginId);
 		            pStmt.setString(2, name);
+		            pStmt.setString(3, address);
 		            pStmt.setString(3, password);
-		            pStmt.setString(4, id);
+		            pStmt.setString(4, userId);
 
 		          //暗号化
 		            String sourse="password";
@@ -256,14 +257,14 @@ public class UserDAO {
 
 		    }
 
-		    public void updateUserWithoutPassword(String id, String name,  String address) {
+		    public void updateUserWithoutPassword(String userId,String name,String address) {
 		        Connection conn=null;
 		    	try {
 		    		//connectDB
 		    		conn=DBManager.getConnection();
 
 		    		//update文
-		    		String sql ="UPDATE user SET name=?,address =? WHERE id=?";
+		    		String sql ="UPDATE user SET name=?,address =? WHERE user_id=?";
 		    		//インサート実行
 		    		 // SELECTを実行し、結果表を取得
 		            PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -271,7 +272,7 @@ public class UserDAO {
 
 		            pStmt.setString(1, name);
 		            pStmt.setString(2, address);
-		            pStmt.setString(3, id);
+		            pStmt.setString(3, userId);
 
 
 

@@ -7,11 +7,16 @@ public class BuyDetailBeans implements Serializable{
 
 	private int buyDetailId;
 	private int buyId;
-	private int itemId;
-	private int colorId;
-	private int sizeId;
+	private int itemDetailId;
 	private int purchaseQuantity;
 
+	public BuyDetailBeans(int buyDetailId, int buyId, int itemDetailId, int purchaseQuantity) {
+		this.buyDetailId=buyDetailId;
+		this.buyId=buyId;
+		this.itemDetailId=itemDetailId;
+		this.purchaseQuantity=purchaseQuantity;
+
+	}
 	public int getBuyDetailId() {
 		return buyDetailId;
 	}
@@ -24,29 +29,19 @@ public class BuyDetailBeans implements Serializable{
 	public void setBuyId(int buyId) {
 		this.buyId = buyId;
 	}
-	public int getItemId() {
-		return itemId;
-	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	public int getColorId() {
-		return colorId;
-	}
-	public void setColorId(int colorId) {
-		this.colorId = colorId;
-	}
-	public int getSizeId() {
-		return sizeId;
-	}
-	public void setSizeId(int sizeId) {
-		this.sizeId = sizeId;
-	}
+
+
 	public int getPurchaseQuantity() {
 		return purchaseQuantity;
 	}
 	public void setPurchaseQuantity(int purchaseQuantity) {
 		this.purchaseQuantity = purchaseQuantity;
+	}
+	public int getItemDetailId() {
+		return itemDetailId;
+	}
+	public void setItemDetailId(int itemDetailId) {
+		this.itemDetailId = itemDetailId;
 	}
 
 }

@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class ItemBeans implements Serializable{
 
@@ -10,8 +9,6 @@ public class ItemBeans implements Serializable{
 	private int price;
 	private int categoryId;
 	private String detail;
-	private Date createDate;
-	private Date updateDate;
 
 
 	public int getItemId() {
@@ -43,18 +40,6 @@ public class ItemBeans implements Serializable{
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 
 }

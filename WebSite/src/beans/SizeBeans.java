@@ -4,14 +4,18 @@ import java.io.Serializable;
 
 public class SizeBeans implements Serializable{
 
-	int sideId;
-	String sizeName;
+	private int sizeId;
+	private String sizeName;
 
-	public int getSideId() {
-		return sideId;
+	public SizeBeans(int sizeId, String sizeName) {
+		this.sizeId=sizeId;
+		this.sizeName=sizeName;
 	}
-	public void setSideId(int sideId) {
-		this.sideId = sideId;
+	public int getSideId() {
+		return sizeId;
+	}
+	public void setSideId(int sizeId) {
+		this.sizeId = sizeId;
 	}
 	public String getSizeName() {
 		return sizeName;

@@ -7,6 +7,10 @@ public class ColorBeans implements Serializable{
 	private int colorId;
 	private String colorName;
 
+	public ColorBeans(int colorId, String colorName) {
+		this.colorId=colorId;
+		this.colorName=colorName;
+	}
 	public int getColorId() {
 		return colorId;
 	}

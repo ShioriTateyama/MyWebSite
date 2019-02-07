@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class FileBeans implements Serializable{
 
 
-	int fileId;
-	int itemDetailId;
-	String fileName;
+	private int fileId;
+	private int itemDetailId;
+	private String fileName;
 
 
 	public int getFileId() {
