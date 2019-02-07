@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -47,7 +48,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     			<a class="fas fa-user-circle"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
   			</li>
   		<li class="nav-item">
-    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style=”margin-right: 2em;”></span></a>
+    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
   			</li>
 
 
@@ -76,8 +77,8 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     </div>
   </nav>
 </header>
-
-    <form class="form-signin" style="margin-top: 200px">
+<h3 class="text-center" style="margin-top: 200px">ログイン画面</h3>
+    <form class="form-signin" style="margin-top: 50px">
 
 
 
@@ -85,15 +86,21 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <div class="row">
   <div class="col-md-2 offset-md-5">
 
-  <label for="inputEmail" class="sr-only">メールアドレス</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  <label for="inputPassword" class="sr-only">パスワード</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+  <input type="text" class="form-control" placeholder="ログインID" required autofocus>
+
+  <input type="password"  class="form-control" placeholder="パスワード" required>
   <div class="checkbox mb-3"></div>
 
 
 
   <button class="btn btn-dark btn-block" type="submit">ログイン</button>
+
+  <c:if test="${errorMsg != null}" >
+	    <div class="p"><span style="color: #F00;">
+		  ${errorMsg}
+		</span></div>
+	</c:if>
 
   <button type="button" class="btn btn-secondary" style="margin-top: 60px">新規登録はこちら</button>
    </div></div>

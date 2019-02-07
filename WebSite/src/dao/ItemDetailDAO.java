@@ -92,7 +92,7 @@ public class ItemDetailDAO {
  * @param colorId
  * @return
  */
-	public List<ItemDetailBeans> getItemBySizeId(int categoryId,int colorId) {
+	public List<ItemDetailBeans> getItemByColorId(int categoryId,int colorId) {
         Connection conn = null;
         List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
 

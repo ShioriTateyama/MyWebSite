@@ -29,6 +29,19 @@ public class UserBeans implements Serializable{
 		this.createDate=createDateData;
 		this.updateDate=updateDateData;
 	}
+	public UserBeans(int userId, String loginId, String name, String address) {
+		this.userId=userId;
+		this.loginId=loginId;
+		this.name=name;
+		this.address=address;
+	}
+	public UserBeans(int userId, String loginId, String name, String address, String password) {
+		this.userId=userId;
+		this.loginId=loginId;
+		this.name=name;
+		this.address=address;
+		this.password=password;
+	}
 	public int getUserId() {
 		return userId;
 	}

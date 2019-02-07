@@ -66,7 +66,7 @@ public class UserDAO {
  * @param id
  * @return
  */
-	 public UserBeans referUser(String userId) {
+	 public UserBeans referUser(int userId) {
 	        Connection conn = null;
 	        try {
 	            // データベースへ接続
@@ -77,7 +77,7 @@ public class UserDAO {
 
 	             // SELECTを実行し、結果表を取得
 	            PreparedStatement pStmt = conn.prepareStatement(sql);
-	            pStmt.setString(1, userId);
+	            pStmt.setInt(1, userId);
 
 
 	            ResultSet rs = pStmt.executeQuery();
@@ -210,14 +210,14 @@ public class UserDAO {
 		    }
 
 
-		    public void updateUser(String userId,String loginId,String name,String address,String password) {
+		    public void updateUser(int userId,String loginId,String name,String address,String password) {
 		        Connection conn=null;
 		    	try {
 		    		//connectDB
 		    		conn=DBManager.getConnection();
 
 		    		//update文
-		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,password=? WHERE id=?;";
+		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,password=?, update_date=now() WHERE user_id=?;";
 		    		//インサート実行
 		    		 // SELECTを実行し、結果表を取得
 		            PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -226,7 +226,7 @@ public class UserDAO {
 		            pStmt.setString(2, name);
 		            pStmt.setString(3, address);
 		            pStmt.setString(3, password);
-		            pStmt.setString(4, userId);
+		            pStmt.setInt(4, userId);
 
 		          //暗号化
 		            String sourse="password";
@@ -257,22 +257,22 @@ public class UserDAO {
 
 		    }
 
-		    public void updateUserWithoutPassword(String userId,String name,String address) {
+		    public void updateUserWithoutPassword(int userId,String loginId,String name,String address) {
 		        Connection conn=null;
 		    	try {
 		    		//connectDB
 		    		conn=DBManager.getConnection();
 
 		    		//update文
-		    		String sql ="UPDATE user SET name=?,address =? WHERE user_id=?";
+		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,update_dsate=now() WHERE user_id=?";
 		    		//インサート実行
 		    		 // SELECTを実行し、結果表を取得
 		            PreparedStatement pStmt = conn.prepareStatement(sql);
 
-
-		            pStmt.setString(1, name);
-		            pStmt.setString(2, address);
-		            pStmt.setString(3, userId);
+		            pStmt.setString(1, loginId);
+		            pStmt.setString(2, name);
+		            pStmt.setString(3, address);
+		            pStmt.setInt(4, userId);
 
 
 
