@@ -1,6 +1,7 @@
 package ec;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.UserBeans;
-import dao.UserDAO;
+import beans.BuyBeans;
+import beans.BuyDetailBeans;
+import dao.BuyDAO;
+import dao.BuyDetailDAO;
 
 /**
- * Servlet implementation class UserUpdateResultServlet
+ * Servlet implementation class UserBuyHistoryDetail
  */
-@WebServlet("/UserUpdateResultServlet")
-public class UserUpdateResultServlet extends HttpServlet {
+@WebServlet("/UserBuyHistoryDetailServlet")
+public class UserBuyHistoryDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserUpdateResultServlet() {
+    public UserBuyHistoryDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,26 +44,27 @@ public class UserUpdateResultServlet extends HttpServlet {
 		}
 
 		// URLからGETパラメータとしてIDを受け取る
-		String id = request.getParameter("userId");
-		int userId=Integer.parseInt(id);
+		String id = request.getParameter("buyId");
+		int buyId=Integer.parseInt(id);
 		// 確認用：idをコンソールに出力
-		System.out.println(userId);
+		System.out.println(buyId);
 
-		UserDAO userDao =new UserDAO();
-		UserBeans userInfo =userDao.referUser(userId);
+		BuyDAO buyDao =new BuyDAO();
+		BuyBeans selectBuyData=buyDao.selectBuyData(buyId);
 
-		//requestスコープにインスタンスを保存
-		request.setAttribute("loginUserInfo", userInfo);
+		//Requestスコープにインスタンスを保存
+		request.setAttribute("selectBuyData", selectBuyData);
 
-		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserUpdateResult.jsp");
+		BuyDetailDAO buyDetailDao =new BuyDetailDAO();
+		List<BuyDetailBeans> buyDetailData =buyDetailDao.selectBuyDetailData(buyId);
+
+		//Requestスコープにインスタンスを保存
+		request.setAttribute("buyDetailData", buyDetailData);
+
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserBuyHistoryDetail.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
+
 }

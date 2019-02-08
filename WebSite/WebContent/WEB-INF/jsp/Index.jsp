@@ -40,28 +40,28 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-    			<a class="fas fa-user-circle"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
   			</li>
   		<li class="nav-item">
-    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style=”margin-right: 2em;”></span></a>
+    			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
   			</li>
 
 
 <li class="nav-item active">
-          <a class="nav-link" href="#">TOWELS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=1">TOWELS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHMATS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=2">BATHMATS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHROBES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=3">BATHROBES<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCESSORIES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=4">ACCESSORIES<span class="sr-only">(current)</span></a>
         </li>
 
 
@@ -89,13 +89,13 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-6">
-        <a href="#"><img src="../img/toweltop.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
+        <a href="ItemServlet?categoryId=1"><img src="img/toweltop.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
         <h2>TOWELS</h2>
       </div><!-- /.col-lg-4 -->
 
 
       <div class="col-lg-6">
-      <a href="#"><img src="../img/bathmat.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
+      <a href="ItemServlet?categoryId=2"><img src="img/bathmat.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
         <h2>BATH MATS</h2>
 
       </div><!-- /.col-lg-4 -->
@@ -104,12 +104,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       <div class="row">
 
       <div class="col-lg-6">
-      <a href="#"><img src="../img/robe.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
+      <a href="ItemServlet?categoryId=3"><img src="img/robe.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
         <h2>BATHROBES</h2>
       </div><!-- /.col-lg-8 -->
 
       <div class="col-lg-6">
-      <a href="#"><img src="../img/ac.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
+      <a href="ItemServlet?categoryId=4"><img src="img/ac.jpg" class="rounded-circle" alt="towel" width="350" height="350"></a>
         <h2>ACCESSORIES</h2>
          </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->

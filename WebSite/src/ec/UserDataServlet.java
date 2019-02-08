@@ -46,10 +46,10 @@ public class UserDataServlet extends HttpServlet {
 				System.out.println(userId);
 
 				UserDAO userDao =new UserDAO();
-				UserBeans user =userDao.referUser(userId);
+				UserBeans loginUserInfo =userDao.referUser(userId);
 
-				//セッションスコープにインスタンスを保存
-				session.setAttribute("user", user);
+				//requestスコープにインスタンスを保存
+				request.setAttribute("loginUserInfo", loginUserInfo);
 
 				RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserData.jsp");
 				dispatcher.forward(request, response);

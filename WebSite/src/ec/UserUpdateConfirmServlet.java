@@ -2,13 +2,16 @@ package ec;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.UserBeans;
+import dao.UserDAO;
 
 /**
  * Servlet implementation class UserUpdateConfirmServlet
@@ -29,17 +32,84 @@ public class UserUpdateConfirmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// ログインセッションがない場合、ログイン画面にリダイレクトさせる
+		HttpSession session =request.getSession(false);
+		if(session.getAttribute("loginUser")== null ) {
+			session =request.getSession(true);
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+		UserBeans updateUser=(UserBeans)request.getAttribute("updateUser");
+		UserBeans withoutPassword=(UserBeans)request.getAttribute("withoutPassword");
+
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserUpdateConfirm.jsp");
+		dispatcher.forward(request, response);
+
+		if(updateUser!=null) {
+			// セッションスコープを取得
+
+			session.removeAttribute("updateUser");
+
+		}if(withoutPassword!=null) {
+
+			session.removeAttribute("withoutPassword");
+		}
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
-		UserBeans updateUser=(UserBeans)request.getAttribute("updateUser");
-		UserBeans withoutPassword=(UserBeans)request.getAttribute("withoutPassword");
-	}
+		String cancel =request.getParameter("cancel");
+
+
+				// リクエストパラメータの入力項目を取得
+				String id = request.getParameter("user_id");
+				int userId=Integer.parseInt(id);
+				String loginId = request.getParameter("login_id");
+				String name=request.getParameter("name");
+				String address=request.getParameter("address");
+				String password =request.getParameter("password");
+
+
+		HttpSession session =request.getSession();
+		UserBeans updateUser=(UserBeans)session.getAttribute("updateUser");
+		UserBeans withoutPassword=(UserBeans)session.getAttribute("withoutPassword");
+
+		UserDAO userDao =new UserDAO();
+
+		//cancelだった時＝nullではない
+		if(cancel!=null) {
+
+
+			response.sendRedirect("UserDataServlet");
+			return;
+		}if(updateUser!=null) {
+			// セッションスコープを取得
+
+			userDao.updateUser(userId,loginId,name, address,password);
+			session.removeAttribute("updateUser");
+
+
+		}if(withoutPassword!=null) {
+
+			userDao.updateUserWithoutPassword(userId,loginId,name, address);
+
+			session.removeAttribute("withoutPassword");
+		}
+			// userupdateresultのサーブレットにリダイレクト
+			response.sendRedirect("UserUpdateResultServlet");
+
+
+
+
+		}
+
+
+
+
 
 }

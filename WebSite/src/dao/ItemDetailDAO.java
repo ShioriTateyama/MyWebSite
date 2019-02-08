@@ -26,11 +26,12 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "SELECT * FROM item_detail"+
-            "INNER JOIN item ON item_detail.item_id = item_detail.item_id"+
-            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id"+
-            "INNER JOIN size ON size.size_id=item_detail.size_id"+
-            "WHERE category_id =? ORDER BY item_detail_id";
+            String sql = "SELECT * FROM item_detail "+
+            "INNER JOIN item ON item_detail.item_id = item.item_id "+
+            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
+            "INNER JOIN size ON size.size_id=item_detail.size_id "+
+            "LEFT OUTER JOIN favorite ON item_detail.item_detail_id = favorite.item_detail_id "+
+            "WHERE category_id =? ORDER BY file.item_detail_id DESC";
 
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, categoryId);
@@ -46,15 +47,20 @@ public class ItemDetailDAO {
             String sizeName="";
             int stock=0;
             List<String> fileNames=null;
+            boolean favoriteFlg = false;
 
 			while (rs.next()) {
+
+
 				//②item_detail_idが次の数に切り替わったら、インスタンスを作成する
 				if (itemDetailId != rs.getInt("item_detail_id")) {
 					if (itemDetailId >= 0) {
 						//item_detail_idごとにインスタンス作成
 						ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryIdData,
-								detail, stock,sizeName,fileNames);
+								detail, stock,sizeName,fileNames, favoriteFlg);
 						ItemDetailList.add(item);
+
+						favoriteFlg = false;
 					}
 				//①値を取得する
 					itemDetailId = rs.getInt("item_detail_id");
@@ -64,6 +70,12 @@ public class ItemDetailDAO {
 					detail = rs.getString("detail");
 					sizeName = rs.getString("size_name");
 					stock = rs.getInt("stock");
+
+					if(rs.getInt("favorite_id") != 0) {
+						favoriteFlg = true;
+					}
+
+
 					fileNames = new ArrayList<>();
 				}
 				fileNames.add(rs.getString("file_name"));
@@ -101,11 +113,11 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "SELECT * FROM item_detail"+
-            "INNER JOIN item ON item_detail.item_id = item_detail.item_id"+
-            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id"+
-            "INNER JOIN size ON size.size_id=item_detail.size_id"+
-            "WHERE color_id =? AND category_id=? ORDER BY item_detail_id";
+            String sql = "SELECT * FROM item_detail "+
+            "INNER JOIN item ON item_detail.item_id = item.item_id "+
+            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
+            "INNER JOIN size ON size.size_id=item_detail.size_id "+
+            "WHERE color_id =? AND category_id=? ORDER BY file.item_detail_id ";
 
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, colorId);
@@ -163,7 +175,11 @@ public class ItemDetailDAO {
 		return ItemDetailList;
 
     }
-
+/**
+ * 検索する
+ * @param name
+ * @return
+ */
 	public List<ItemDetailBeans> getItemBySearch(String name) {
         Connection conn = null;
         List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
@@ -173,11 +189,11 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "SELECT * FROM item_detail"+
-            "INNER JOIN item ON item_detail.item_id = item_detail.item_id"+
-            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id"+
-            "INNER JOIN size ON size.size_id=item_detail.size_id"+
-            "WHERE name LIKE '%"+name+"%' ORDER BY item_detail_id";
+            String sql = "SELECT * FROM item_detail "+
+            "INNER JOIN item ON item_detail.item_id = item.item_id "+
+            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
+            "INNER JOIN size ON size.size_id=item_detail.size_id "+
+            "WHERE name LIKE '%"+name+"%' ORDER BY file.item_detail_id ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -231,5 +247,79 @@ public class ItemDetailDAO {
 		return ItemDetailList;
 
     }
+	public List<ItemDetailBeans> selectItemDetailDatabyItemDetailId(int itemDetailId) {
+        Connection conn = null;
+        List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
 
+            // SELECT文を準備
+            String sql = "SELECT * FROM item_detail "+
+                    "INNER JOIN item ON item_detail.item_id = item.item_id "+
+                    "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
+                    "INNER JOIN size ON size.size_id=item_detail.size_id "+
+                    "WHERE item_detai.item_detail_id=? ORDER BY file.item_detail_id ";
+
+
+             // SELECTを実行し、結果表を取得
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, itemDetailId);
+
+
+            ResultSet rs = pStmt.executeQuery();
+
+            int itemDetailIdData =-1;
+            String itemName= "";
+            int price = 0;
+            int categoryIdData=0;
+            String detail ="";
+            String sizeName="";
+            int stock=0;
+            List<String> fileNames=null;
+
+
+            rs.next();//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
+
+				//②item_detail_idが次の数に切り替わったら、インスタンスを作成する
+				if (itemDetailId != rs.getInt("item_detail_id")) {
+					if (itemDetailId >= 0) {
+						//item_detail_idごとにインスタンス作成
+						ItemDetailBeans item = new ItemDetailBeans(itemDetailIdData, itemName, price, categoryIdData,
+								detail, stock,sizeName,fileNames);
+						ItemDetailList.add(item);
+					}
+				//①値を取得する
+					itemDetailIdData = rs.getInt("item_detail_id");
+					itemName = rs.getString("item_name");
+					price = rs.getInt("price");
+					categoryIdData = rs.getInt("category_id");
+					detail = rs.getString("detail");
+					sizeName = rs.getString("size_name");
+					stock = rs.getInt("stock");
+					fileNames = new ArrayList<>();
+				}
+				fileNames.add(rs.getString("file_name"));
+
+
+            return ItemDetailList;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+		return null;
+
+    }
 }

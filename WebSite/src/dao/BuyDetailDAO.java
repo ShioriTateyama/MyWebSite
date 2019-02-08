@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import base.DBManager;
 import beans.BuyDetailBeans;
@@ -51,32 +53,35 @@ public class BuyDetailDAO {
 	     }
 	    }
 
-	public BuyDetailBeans selectBuyDetailData(int buyDetailId) {
+	public List<BuyDetailBeans> selectBuyDetailData(int buyId) {
         Connection conn = null;
+        List<BuyDetailBeans> buyDetailList = new ArrayList<BuyDetailBeans>();
         try {
             // データベースへ接続
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "SELECT * FROM buy_detail WHERE buy_detail_id = ?;";
+            String sql = "SELECT * FROM buy_detail WHERE buy_id = ?;";
 
              // SELECTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, buyDetailId);
+            pStmt.setInt(1, buyId);
 
 
             ResultSet rs = pStmt.executeQuery();
 
-            rs.next();//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
+            while (rs.next()) {//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
             int buyDetailIdData = rs.getInt("buy_detail_id");
-            int buyId= rs.getInt("buy_id");
+            int buyIdData= rs.getInt("buy_id");
             int itemDetailId= rs.getInt("item_detail_id");
             int purchaseQuantity= rs.getInt("purchase_quantity");
 
-            BuyDetailBeans buyDetail = new  BuyDetailBeans(buyDetailIdData, buyId, itemDetailId, purchaseQuantity);
+            BuyDetailBeans buyDetail = new  BuyDetailBeans(buyDetailIdData, buyIdData, itemDetailId, purchaseQuantity);
 
+            buyDetailList.add(buyDetail);
+            }
 
-            return buyDetail;
+            return buyDetailList;
 
 
         } catch (SQLException e) {

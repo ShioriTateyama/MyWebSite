@@ -56,14 +56,14 @@ public class LoginServlet extends HttpServlet {
 
 				// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 				UserDAO userDao = new UserDAO();
-				UserBeans user = userDao.findByLoginInfo(loginId, password);
+				UserBeans loginUser = userDao.findByLoginInfo(loginId, password);
 
-				if(user ==null) {
+				if(loginUser ==null) {
 					//インスタンスをリクエストスコープに保存
-					request.setAttribute("errorMsg", "ログインIDまたはパスワードが異なります" );
+					request.setAttribute("error", "ログインIDまたはパスワードが異なります" );
 
 					// ログインjspにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
 					dispatcher.forward(request, response);
 					return;
 				}
@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 				// セッションスコープを取得
 				HttpSession session = request.getSession();
 				//セッションスコープにインスタンスを保存
-				session.setAttribute("loginUser", user);
+				session.setAttribute("loginUser", loginUser);
 
 				// indexのサーブレットにリダイレクト
 				response.sendRedirect("IndexServlet");

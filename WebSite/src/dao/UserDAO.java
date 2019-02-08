@@ -41,10 +41,16 @@ public class UserDAO {
 	            if (!rs.next()) {
 	                return null;
 	            }
-
-	            String loginIdData = rs.getString("login_id");
+	            int userIdData = rs.getInt("user_id");
+	            String loginIdData = rs.getString("login_Id");
 	            String nameData = rs.getString("name");
-	            return new UserBeans(loginIdData,nameData);
+	            String addressData = rs.getString("address");
+	            String passwordData = rs.getString("password");
+	            Date createDateData = rs.getDate("create_date");
+	            Date updateDateData = rs.getDate("update_date");
+
+
+	            return new UserBeans(userIdData,loginIdData,nameData,addressData,passwordData,createDateData, updateDateData);
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -124,7 +130,7 @@ public class UserDAO {
 	  * @param cteateDate
 	  * @param updateDate
 	  */
-	 public void resisterUser(String loginId,String name,String address,  String password, String cteateDate,String updateDate) {
+	 public void resisterUser(String loginId,String name,String address,  String password) {
 		    Connection conn=null;
 			try {
 				//connectDB
@@ -210,7 +216,7 @@ public class UserDAO {
 		    }
 
 
-		    public void updateUser(int userId,String loginId,String name,String address,String password) {
+		    public UserBeans updateUser(int userId,String loginId,String name,String address,String password) {
 		        Connection conn=null;
 		    	try {
 		    		//connectDB
@@ -254,6 +260,7 @@ public class UserDAO {
 		                }
 		            }
 		    	}
+				return null;
 
 		    }
 

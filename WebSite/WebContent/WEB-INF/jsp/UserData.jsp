@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -40,27 +42,29 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-    			<a class="fas fa-user-circle"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
   			</li>
   		<li class="nav-item">
-    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style=”margin-right: 2em;”></span></a>
+    			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
   			</li>
+
 <li class="nav-item active">
-          <a class="nav-link" href="#">TOWELS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=1">TOWELS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHMATS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=2">BATHMATS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHROBES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=3">BATHROBES<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCESSORIES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=4">ACCESSORIES<span class="sr-only">(current)</span></a>
         </li>
+
 
       </ul>
 
@@ -77,20 +81,22 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <div class="container" style="margin-top: 60px">
  <table class="table table-bordered">
 
+<thead>
+				<tr >
+					<th>名前</th>
+					<th>ログインID</th>
+					<th>住所</th>
+
+
+				</tr>
+				 </thead>
   <tbody>
+  <c:forEach var="user" items="${loginUserInfo}" >
     <tr>
-      <th scope="row">名前</th>
-      <td>楯山詩織</td>
-
-    </tr>
-    <tr>
-      <th scope="row">ログインID</th>
-      <td>Jacob</td>
-
-    </tr>
-    <tr>
-      <th scope="row">住所</th>
-      <td >埼玉県春日部市豊町１−１８−４</td>
+                     <td>${loginUserInfo.name}</td>
+                     <td>${loginUserInfo.loginId}</td>
+                     <td>${loginUserInfo.address}</td>
+    </tr></c:forEach>
 
 
   </tbody>
@@ -105,7 +111,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  	 <div class="row">
   	<div class="col-md-2 offset-md-5">
 
-		 <button class="btn btn-dark btn-block" type="submit">ユーザー情報更新</button>
+		 <a href="UserUpdateServlet"><button class="btn btn-dark btn-block" type="submit">ユーザー情報更新</button></a>
 
  	</div></div>
 
@@ -114,8 +120,8 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <div class="col-md-2 offset-md-5">
 
 
-<button type="button" class="btn btn-secondary" style="margin-top: 80px">お気に入りした商品を見る</button>
-  <button type="button" class="btn btn-secondary" style="margin-top: 30px">購入履歴を見る</button>
+<a href="FavoriteServlet"><button type="button" class="btn btn-secondary" style="margin-top: 80px">お気に入りした商品を見る</button></a>
+  <a href="UserBuyHistoryServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px">購入履歴を見る</button></a>
 
    </div></div>
 

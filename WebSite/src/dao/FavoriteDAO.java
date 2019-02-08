@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import beans.FavoriteBeans;
 
 public class FavoriteDAO {
 
-	public void insertFavorite(int userId,int itemDetailId,Date cteateDate) {
+	public FavoriteBeans insertFavorite(int userId,int itemDetailId) {
 	    Connection conn=null;
 		try {
 			//connectDB
@@ -21,13 +20,83 @@ public class FavoriteDAO {
 
 
 			//insert文
-			String sql ="INSERT INTO favorite(item_detail_id,create_date)VALUES(?,,now() WHERE user_id=?)";
+			String sql ="INSERT INTO favorite(item_detail_id,user_id)VALUES(?,?)";
 			//インサート実行
 			 // SELECTを実行し、結果表を取得
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, itemDetailId);
-	        pStmt.setDate(2, cteateDate);
-	        pStmt.setInt(3, userId);
+	        pStmt.setInt(2, userId);
+
+
+
+			pStmt.executeUpdate();
+
+
+		 } catch (SQLException e) {
+	         e.printStackTrace();
+	     } finally {
+	         // データベース切断
+	         if (conn != null) {
+	             try {
+	                 conn.close();
+	             } catch (SQLException e) {
+	                 e.printStackTrace();
+	             }
+	         }
+	     }
+		return null;
+	    }
+
+	public boolean findSameFavoriteId(int userId,int itemDetailId) {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "SELECT favorite_id FROM favorite WHERE user_id = ? AND item_detail_id=?";
+
+             // SELECTを実行し、結果表を取得
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, userId);
+            pStmt.setInt(2,itemDetailId);
+
+            ResultSet rs = pStmt.executeQuery();
+
+            return rs.next();//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+		return true;
+    }
+
+	public void deleteFavorite(int userId,int itemDetailId) {
+	    Connection conn=null;
+		try {
+			//connectDB
+			conn=DBManager.getConnection();
+
+
+			//insert文
+			String sql ="DELETE FROM favorite where item_detail_id =? AND user_id=?";
+			//インサート実行
+			 // SELECTを実行し、結果表を取得
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, itemDetailId);
+	        pStmt.setInt(2, userId);
 
 
 

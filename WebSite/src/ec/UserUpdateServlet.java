@@ -40,6 +40,7 @@ public class UserUpdateServlet extends HttpServlet {
 			return;
 		}
 
+		session.getAttribute("loginUserInfo");
 
 
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
@@ -73,13 +74,13 @@ public class UserUpdateServlet extends HttpServlet {
 
 		//失敗の時
 		if(!(password.equals(password2))) {
-			// idを引数にして、idに紐づくユーザ情報を出力する
 
-
+			// useridに紐づくユーザ情報を出力する
 			request.setAttribute("user", user);
 
+
 			//インスタンスをリクエストスコープに保存
-			request.setAttribute("errorMsg", "入力された内容は正しくありません。" );
+			request.setAttribute("errorMsg", "パスワードに誤りがあります。" );
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
 			dispatcher.forward(request, response);
@@ -89,14 +90,11 @@ public class UserUpdateServlet extends HttpServlet {
 
 		}if(name.isEmpty()||address.isEmpty()||loginId.isEmpty()) {
 
-			// idを引数にして、idに紐づくユーザ情報を出力する
-
-
+			// useridに紐づくユーザ情報を出力する
 			request.setAttribute("user", user);
 
-
 			//インスタンスをリクエストスコープに保存
-			request.setAttribute("errorMsg", "入力された内容は正しくありません。" );
+			request.setAttribute("error", "未入力の項目があります。" );
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
 			dispatcher.forward(request, response);
 			return ;

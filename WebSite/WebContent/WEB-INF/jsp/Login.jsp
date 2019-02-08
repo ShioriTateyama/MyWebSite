@@ -41,33 +41,32 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-    			<a class="fas fa-user-circle"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
   			</li>
   		<li class="nav-item">
-    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
+    			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
   			</li>
 
 
 <li class="nav-item active">
-          <a class="nav-link" href="#">TOWELS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=1">TOWELS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHMATS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=2">BATHMATS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHROBES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=3">BATHROBES<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCESSORIES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=4">ACCESSORIES<span class="sr-only">(current)</span></a>
         </li>
 
 
       </ul>
-
 
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -78,7 +77,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   </nav>
 </header>
 <h3 class="text-center" style="margin-top: 200px">ログイン画面</h3>
-    <form class="form-signin" style="margin-top: 50px">
+    <form class="form-signin" style="margin-top: 50px" action="LoginServlet" method="post">
 
 
 
@@ -87,22 +86,22 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <div class="col-md-2 offset-md-5">
 
 
-  <input type="text" class="form-control" placeholder="ログインID" required autofocus>
+  <input type="text" name="loginId" class="form-control" placeholder="ログインID" required autofocus>
 
-  <input type="password"  class="form-control" placeholder="パスワード" required>
+  <input type="password"  name="password" class="form-control" placeholder="パスワード" required>
   <div class="checkbox mb-3"></div>
 
 
 
-  <button class="btn btn-dark btn-block" type="submit">ログイン</button>
+  <button class="btn btn-dark btn-block" type="submit" value="login">ログイン</button>
 
-  <c:if test="${errorMsg != null}" >
+  <c:if test="${error != null}" >
 	    <div class="p"><span style="color: #F00;">
-		  ${errorMsg}
+		  ${error}
 		</span></div>
 	</c:if>
 
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px">新規登録はこちら</button>
+  <a href ="ResistServlet"><button type="button" class="btn btn-secondary" style="margin-top: 60px">新規登録はこちら</button></a>
    </div></div>
 
 

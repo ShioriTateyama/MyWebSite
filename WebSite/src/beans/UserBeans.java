@@ -20,6 +20,12 @@ public class UserBeans implements Serializable{
 		this.loginId=loginId;
 		this.name=name;
 	}
+	public UserBeans(String loginId, String name,String address,String password) {
+		this.loginId=loginId;
+		this.name=name;
+		this.address=address;
+		this.password=password;
+	}
 	public UserBeans(int userId,String loginId,String name,String address,String password,Date createDateData,Date updateDateData) {
 		this.userId=userId;
 		this.loginId=loginId;

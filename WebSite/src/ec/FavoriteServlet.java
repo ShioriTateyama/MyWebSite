@@ -61,10 +61,10 @@ public class FavoriteServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 					return;
 				}
-				// リクエストスコープにユーザ一覧情報をセット
+				// リクエストスコープにお気に入り商品情報をセット
 				request.setAttribute("favoriteList", favoriteList);
 
-				// ユーザ一覧のjspにフォワード
+
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Favorite.jsp");
 				dispatcher.forward(request, response);
 	}
@@ -73,8 +73,32 @@ public class FavoriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+				// URLからGETパラメータとしてIDを受け取る
+				String id = request.getParameter("itemDetailId");
+				int itemDetailId =Integer.parseInt(id);
+				// 確認用：idをコンソールに出力
+				System.out.println(itemDetailId);
+				// URLからGETパラメータとしてIDを受け取る
+				String uid = request.getParameter("userId");
+				int userId =Integer.parseInt(uid);
+				// 確認用：idをコンソールに出力
+				System.out.println(userId);
+
+				FavoriteDAO favoriteDao = new FavoriteDAO();
+				favoriteDao.findSameFavoriteId(userId,itemDetailId);
+				
+
+				if(favoriteDao.findSameFavoriteId(userId,itemDetailId)) {
+				favoriteDao.deleteFavorite(userId, itemDetailId);
+
+				}else{
+					favoriteDao.insertFavorite(userId,itemDetailId) ;
+
+					// サーブレットにリダイレクト
+					response.sendRedirect("ItemServlet");
+				}
+
 	}
 
 }

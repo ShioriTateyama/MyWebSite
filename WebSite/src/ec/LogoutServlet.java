@@ -39,9 +39,10 @@ public class LogoutServlet extends HttpServlet {
 				// ログイン時に保存したセッション内のユーザ情報を削除
 
 				session.removeAttribute("loginUser");
+				session.removeAttribute("loginUserInfo");
 
 				// indexのサーブレットにリダイレクト
-				response.sendRedirect("IndexServlet");
+				response.sendRedirect("LogoutServlet");
 	}
 
 

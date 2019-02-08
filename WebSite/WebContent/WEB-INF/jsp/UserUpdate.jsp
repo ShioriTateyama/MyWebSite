@@ -40,26 +40,26 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-    			<a class="fas fa-user-circle"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
   			</li>
   		<li class="nav-item">
-    			<a  class="fas fa-shopping-cart"class="nav-link" href="#" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style=”margin-right: 2em;”></span></a>
+    			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
   			</li>
   			<li class="nav-item active">
-          <a class="nav-link" href="#">TOWELS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=1">TOWELS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHMATS<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=2">BATHMATS<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">BATHROBES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=3">BATHROBES<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCESSORIES<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="ItemServlet?categoryId=4">ACCESSORIES<span class="sr-only">(current)</span></a>
         </li>
 
 
@@ -106,7 +106,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  	 <div class="row">
   	<div class="col-md-2 offset-md-5">
 
-		 <button class="btn btn-dark btn-block btn-lg" type="submit">ユーザー情報更新</button>
+		 <a href="UserUpdateConfirmServlet"><button class="btn btn-dark btn-block btn-lg" type="submit">ユーザー情報更新</button></a>
 
  	</div></div>
 <p></p>

@@ -53,7 +53,7 @@ public class BuyDAO {
 	     }
 	    }
 /**
- * 購入データを得る
+ * 購入データをすべて得る
  * @param userId
  * @return
  */
@@ -99,6 +99,50 @@ public class BuyDAO {
             }
         }
 		return buyList;
+
+    }
+	public BuyBeans selectBuyData(int buyId) {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "SELECT * FROM buy WHERE buy_id = ?;";
+
+             // SELECTを実行し、結果表を取得
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, buyId);
+
+
+            ResultSet rs = pStmt.executeQuery();
+
+            rs.next();//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
+            int buyIdData = rs.getInt("buy_id");
+            int userIdData = rs.getInt("user_Id");
+            int totalPrice = rs.getInt("name");
+            Date create_date = rs.getDate("create_date");
+
+            BuyBeans buy = new BuyBeans(buyIdData, userIdData, totalPrice, create_date);
+
+            return buy;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+		return null;
 
     }
 }

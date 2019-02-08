@@ -11,6 +11,8 @@ public class ItemBeans implements Serializable{
 	private String detail;
 
 
+
+
 	public int getItemId() {
 		return itemId;
 	}
@@ -41,5 +43,6 @@ public class ItemBeans implements Serializable{
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+
 
 }
