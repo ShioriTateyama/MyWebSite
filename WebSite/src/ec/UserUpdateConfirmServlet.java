@@ -86,7 +86,7 @@ public class UserUpdateConfirmServlet extends HttpServlet {
 		if(cancel!=null) {
 
 
-			response.sendRedirect("UserDataServlet");
+			response.sendRedirect("UserDataServlet?userId="+userId);
 			return;
 		}if(updateUser!=null) {
 			// セッションスコープを取得
