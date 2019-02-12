@@ -40,7 +40,17 @@ public class UserUpdateServlet extends HttpServlet {
 			return;
 		}
 
-		session.getAttribute("loginUserInfo");
+		//リクエストパラメータを取得
+				request.setCharacterEncoding("UTF-8");
+
+				// リクエストパラメータの入力項目を取得
+				String id = request.getParameter("userId");
+				int userId=Integer.parseInt(id);
+
+				//リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
+				UserDAO userDao = new UserDAO();
+				UserBeans user = userDao.referUser(userId);
+				request.setAttribute("user", user);
 
 
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserUpdate.jsp");
@@ -57,9 +67,9 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String id = request.getParameter("user_id");
+		String id = request.getParameter("userId");
 		int userId=Integer.parseInt(id);
-		String loginId = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String name=request.getParameter("name");
 		String address=request.getParameter("address");
 		String password =request.getParameter("password");
@@ -70,6 +80,7 @@ public class UserUpdateServlet extends HttpServlet {
 		//リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 		UserDAO userDao = new UserDAO();
 		UserBeans user = userDao.referUser(userId);
+		request.setAttribute("user", user);
 
 
 		//失敗の時

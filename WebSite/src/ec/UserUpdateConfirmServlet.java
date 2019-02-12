@@ -66,10 +66,11 @@ public class UserUpdateConfirmServlet extends HttpServlet {
 		String cancel =request.getParameter("cancel");
 
 
+
 				// リクエストパラメータの入力項目を取得
-				String id = request.getParameter("user_id");
+				String id = request.getParameter("userId");
 				int userId=Integer.parseInt(id);
-				String loginId = request.getParameter("login_id");
+				String loginId = request.getParameter("loginId");
 				String name=request.getParameter("name");
 				String address=request.getParameter("address");
 				String password =request.getParameter("password");
@@ -101,7 +102,7 @@ public class UserUpdateConfirmServlet extends HttpServlet {
 			session.removeAttribute("withoutPassword");
 		}
 			// userupdateresultのサーブレットにリダイレクト
-			response.sendRedirect("UserUpdateResultServlet");
+			response.sendRedirect("UserUpdateResultServlet?userId="+userId);
 
 
 

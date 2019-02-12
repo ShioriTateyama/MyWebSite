@@ -37,17 +37,19 @@ public class ItemSearchResult extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの入力項目を取得
-		String searchWord =request.getParameter("word");
+		String word =request.getParameter("word");
+
+		request.setAttribute("word",word);
 		ItemDetailDAO itemDetailDao =new ItemDetailDAO();
 
-		List<ItemDetailBeans> serchResultList =itemDetailDao.getItemBySearch(searchWord);
+		List<ItemDetailBeans> searchResultList =itemDetailDao.getItemBySearch(word);
 
 		HttpSession session =request.getSession();
 		//スコープにインスタンスを保存
-		session.setAttribute("serchResultList", serchResultList);
-		
-		
-		
+		session.setAttribute("searchResultList", searchResultList);
+
+
+
 
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemSearchResult.jsp");

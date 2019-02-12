@@ -271,7 +271,7 @@ public class UserDAO {
 		    		conn=DBManager.getConnection();
 
 		    		//update文
-		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,update_dsate=now() WHERE user_id=?";
+		    		String sql ="UPDATE user SET login_id=?,name=?,address=?,update_date=now() WHERE user_id=?";
 		    		//インサート実行
 		    		 // SELECTを実行し、結果表を取得
 		            PreparedStatement pStmt = conn.prepareStatement(sql);

@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,16 +33,16 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// URLからGETパラメータとしてIDを受け取る
 		String id = request.getParameter("itemDetailId");
-		int categoryId=Integer.parseInt(id);
+		int itemDetailId=Integer.parseInt(id);
 		// 確認用：idをコンソールに出力
-		System.out.println(categoryId);
+		System.out.println("item detail Id="+itemDetailId);
 
 		ItemDetailDAO itemDetailDao =new ItemDetailDAO();
 
-		List<ItemDetailBeans> itemDetailDataList =itemDetailDao.selectItemDetailDatabyItemDetailId(categoryId) ;
+		ItemDetailBeans itemDetailData =itemDetailDao.selectItemDetailDatabyItemDetailId(itemDetailId) ;
 
 		//Requestスコープにインスタンスを保存
-		request.setAttribute("itemDetailData", itemDetailDataList);
+		request.setAttribute("itemDetailData", itemDetailData);
 
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/ItemDetail.jsp");
 		dispatcher.forward(request, response);

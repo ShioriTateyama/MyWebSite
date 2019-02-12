@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -71,14 +72,14 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-<form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+<form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
+      </form></div>
 
 
 
-    </div>
+
   </nav>
 </header>
 
@@ -89,48 +90,22 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-<div class="card-group" style ="margin-top:60px;">
-<div class="card" style="width: 20rem">
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-  <div class="card-body">
-    <p class="card-text">ウォッシュテイストタオル（２枚セット）</p>
-    <p class="card-text">￥2590</p><button type="button" class="btn btn-secondary" style="margin-top: 30px">お気に入りから削除</button>
-  </div>
-</div>
+<div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
+<c:forEach var="favorite" items="${favoriteList}" >
+<div class="col s12 m3">
 
 <div class="card" style="width: 20rem">
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/${favorite.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/${favorite.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/${favorite.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -144,75 +119,29 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 
-  <div class="card-body">
-    <p class="card-text">ウォッシュテイストタオル（２枚セット）</p>
-    <p class="card-text">￥2590</p>
-    <button type="button" class="btn btn-secondary" style="margin-top: 30px">お気に入りから削除</button>
+  <div class="card-body"><form action="ItemDetailServlet" method="post">
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${favorite.itemDetailId}"> ${favorite.itemName}</a></p>
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${favorite.itemDetailId}">${favorite.price}円</a></p>
+    </form>
+
+
+    <c:if test="${loginUser !=null}">
+    <form action="FavoriteServlet" method="post"><input type="hidden" name="itemDetailId" value="${favorite.itemDetailId}"><input type="hidden" name="favoriteId" value="${favorite.favoriteId}"><input type="hidden" name="userId" value="${loginUser.userId}">
+
+    <c:if test="${favorite.favoriteFlg == false}">
+    <button type="submit" value="addFavorite" class="far fa-star" style="color: black" onclick="{alert('お気に入りに追加しました')}"></button>
+    </c:if>
+    <c:if test="${favorite.favoriteFlg}">
+    <button type="submit" value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
+    </c:if>
+    </form></c:if>
+
+
+  </div>
   </div>
 </div>
 
-<div class="card">
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-  <div class="card-body">
-    <p class="card-text">ウォッシュテイストタオル（２枚セット）</p>
-    <p class="card-text">￥2590</p><button type="button" class="btn btn-secondary" style="margin-top: 30px">お気に入りから削除</button>
-  </div>
-</div>
-<div class="card">
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-  <div class="card-body">
-    <p class="card-text">ウォッシュテイストタオル（２枚セット）</p>
-    <p class="card-text">￥2590</p><button type="button" class="btn btn-secondary" style="margin-top: 30px">お気に入りから削除</button>
-  </div>
-</div>
-</div>
-
-
-
+</c:forEach></div>
 
   <div class="row">
   <div class="col-md-2 offset-md-5">

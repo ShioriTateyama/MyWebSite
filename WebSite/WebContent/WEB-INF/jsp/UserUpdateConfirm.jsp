@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -70,13 +71,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-    </div>
+<form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
+      </form></div>
   </nav>
 </header>
 
@@ -89,33 +87,76 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <div class="container">
  <table class="table table-bordered">
 
+ <c:if test="${updateUser != null}">
+
   <tbody>
     <tr>
       <th scope="row">名前</th>
-      <td>楯山詩織</td>
+      <td>${updateUser.name}</td>
 
     </tr>
     <tr>
       <th scope="row">ログインID</th>
-      <td>Jacob</td>
+      <td>${updateUser.loginId}</td>
 
     </tr>
     <tr>
       <th scope="row">住所</th>
-      <td >埼玉県春日部市豊町１−１８−４</td>
+      <td >${updateUser.address}</td>
 
     </tr>
      <tr>
       <th scope="row">パスワード</th>
-      <td >＊＊＊</td>
+      <td >${updateUser.password}</td>
 
     </tr>
-  </tbody>
+  </tbody></c:if>
+
+  <c:if test="${withoutPassword != null}">
+
+  <tbody>
+    <tr>
+      <th scope="row">名前</th>
+      <td>${withoutPassword.name}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">ログインID</th>
+      <td>${withoutPassword.loginId}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">住所</th>
+      <td >${withoutPassword.address}</td>
+
+    </tr>
+
+  </tbody></c:if>
+
+
 </table>
 </div>
 <p  class="text-center" style= "margin-top: 40px">上記内容で更新してよろしいでしょうか?</p>
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px ; margin-right:30px">戻る</button>
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px; margin-left:30px">更新</button>
+
+<form action="UserUpdateConfirmServlet" method="post">
+
+<c:if test="${updateUser != null}">
+<input type="hidden" name="userId" value="${updateUser.userId}">
+<input type="hidden" name="loginId" value="${updateUser.loginId}">
+<input type="hidden" name="name" value="${updateUser.name}">
+<input type="hidden" name="address" value="${updateUser.address}">
+<input type="hidden" name="password" value="${updateUser.password}">
+</c:if>
+
+<c:if test="${withoutPassword != null}">
+<input type="hidden" name="userId" value="${withoutPassword.userId}">
+<input type="hidden" name="loginId" value="${withoutPassword.loginId}">
+<input type="hidden" name="name" value="${withoutPassword.name}">
+<input type="hidden" name="address" value="${withoutPassword.address}">
+
+</c:if>
+  <button type="submit" class="btn btn-secondary" name="cancel" value="cancel" style="margin-top: 60px ; margin-right:30px">戻る</button>
+  <button type="submit" class="btn btn-secondary" name="update" value="update" style="margin-top: 60px; margin-left:30px">更新</button></form>
 
 
 

@@ -38,7 +38,7 @@ public class UserDataServlet extends HttpServlet {
 					response.sendRedirect("LoginServlet");
 					return;
 				}
-
+				request.setCharacterEncoding("UTF-8");
 				// URLからGETパラメータとしてIDを受け取る
 				String id = request.getParameter("userId");
 				int userId=Integer.parseInt(id);

@@ -26,6 +26,7 @@ public class FavoriteBeans implements Serializable{
 	private int stock;
 
 	private String sizeName;
+	private boolean favoriteFlg;
 
 
 
@@ -38,6 +39,18 @@ public class FavoriteBeans implements Serializable{
 		this.sizeName=sizeName;
 		this.stock=stock;
 		this.fileName=fileName;
+	}
+	public FavoriteBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock, String sizeName, List<String> fileNames, boolean favoriteFlg) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeName=sizeName;
+		this.fileName=fileNames;
+		this.favoriteFlg = favoriteFlg;
 	}
 	public int getFavoriteId() {
 		return favoriteId;
@@ -128,6 +141,12 @@ public class FavoriteBeans implements Serializable{
 	}
 	public void setSizeName(String sizeName) {
 		this.sizeName = sizeName;
+	}
+	public boolean isFavoriteFlg() {
+		return favoriteFlg;
+	}
+	public void setFavoriteFlg(boolean favoriteFlg) {
+		this.favoriteFlg = favoriteFlg;
 	}
 
 }

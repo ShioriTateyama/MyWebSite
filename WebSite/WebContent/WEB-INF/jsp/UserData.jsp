@@ -69,12 +69,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       </ul>
 
 
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-    </div>
+     <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
+      </form></div>
   </nav>
 </header>
 <h3 class="text-center" style="margin-top: 100px">ユーザー情報</h3>
@@ -91,12 +89,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 				</tr>
 				 </thead>
   <tbody>
-  <c:forEach var="user" items="${loginUserInfo}" >
+
     <tr>
                      <td>${loginUserInfo.name}</td>
                      <td>${loginUserInfo.loginId}</td>
                      <td>${loginUserInfo.address}</td>
-    </tr></c:forEach>
+    </tr>
 
 
   </tbody>
@@ -111,7 +109,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  	 <div class="row">
   	<div class="col-md-2 offset-md-5">
 
-		 <a href="UserUpdateServlet"><button class="btn btn-dark btn-block" type="submit">ユーザー情報更新</button></a>
+		 <a href="UserUpdateServlet?userId=${loginUserInfo.userId}"><button class="btn btn-dark btn-block" type="submit">ユーザー情報更新</button></a>
 
  	</div></div>
 
@@ -120,8 +118,8 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <div class="col-md-2 offset-md-5">
 
 
-<a href="FavoriteServlet"><button type="button" class="btn btn-secondary" style="margin-top: 80px">お気に入りした商品を見る</button></a>
-  <a href="UserBuyHistoryServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px">購入履歴を見る</button></a>
+<a href="FavoriteServlet?userId=${loginUserInfo.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 80px">お気に入りした商品を見る</button></a>
+  <a href="UserBuyHistoryServlet?userId=${loginUserInfo.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px">購入履歴を見る</button></a>
 
    </div></div>
 

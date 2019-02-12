@@ -67,6 +67,7 @@ public class FavoriteServlet extends HttpServlet {
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Favorite.jsp");
 				dispatcher.forward(request, response);
+				return;
 	}
 
 	/**
@@ -74,11 +75,13 @@ public class FavoriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
 				// URLからGETパラメータとしてIDを受け取る
-				String id = request.getParameter("itemDetailId");
-				int itemDetailId =Integer.parseInt(id);
+				String itemDId = request.getParameter("itemDetailId");
+				int itemDetailId =Integer.parseInt(itemDId);
 				// 確認用：idをコンソールに出力
 				System.out.println(itemDetailId);
+
 				// URLからGETパラメータとしてIDを受け取る
 				String uid = request.getParameter("userId");
 				int userId =Integer.parseInt(uid);
@@ -87,18 +90,47 @@ public class FavoriteServlet extends HttpServlet {
 
 				FavoriteDAO favoriteDao = new FavoriteDAO();
 				favoriteDao.findSameFavoriteId(userId,itemDetailId);
-				
+
 
 				if(favoriteDao.findSameFavoriteId(userId,itemDetailId)) {
 				favoriteDao.deleteFavorite(userId, itemDetailId);
 
 				}else{
 					favoriteDao.insertFavorite(userId,itemDetailId) ;
-
-					// サーブレットにリダイレクト
-					response.sendRedirect("ItemServlet");
 				}
 
-	}
 
+				// URLからGETパラメータとしてIDを受け取る
+
+				String id = request.getParameter("categoryId");
+				String favoriteId= request.getParameter("favoriteId");
+				String favorite=request.getParameter("favorite");
+
+				if(id != null) {
+				int categoryId =Integer.parseInt(id);
+				// 確認用：idをコンソールに出力
+				System.out.println(categoryId);
+
+				response.sendRedirect("ItemServlet?categoryId="+categoryId);
+				return;
+
+				}if(favoriteId != null){
+					response.sendRedirect("FavoriteServlet?userId="+userId);
+					return;
+				}if(favorite != null){
+					response.sendRedirect("ItemDetailServlet?itemDetailId="+itemDetailId);
+					return;
+				}else {
+
+
+
+
+				request.setCharacterEncoding("UTF-8");
+				// URLからGETパラメータとしてIDを受け取る
+				String word = request.getParameter("word");
+				response.sendRedirect("ItemSearchResultServlet?word="+word);
+
+
+	}
+	}
 }

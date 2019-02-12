@@ -121,14 +121,15 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 <div class="btn-group" style= "margin-top: 50px;margin-left:40px">
-<form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+<form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
       </form></div>
 
 
+
 <div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
-<c:forEach var="search" items="${serchResultList}" >
+<c:forEach var="search" items="${searchResultList}" >
 <div class="col s12 m3">
 
 <div class="card" style="width: 20rem">
@@ -156,27 +157,29 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 
-  <div class="card-body">
-    <p class="card-text">${search.itemName}</p>
-    <p class="card-text">${search.price}円</p>
+  <div class="card-body"><form action="ItemDetailServlet" method="post">
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${search.itemDetailId}"> ${search.itemName}</a></p>
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${search.itemDetailId}">${search.price}円</a></p>
+    </form>
 
 
     <c:if test="${loginUser !=null}">
-    <form action="FavoriteServlet" method="post"><input type="hidden" name="itemDetailId" value="${item.itemDetailId}"><input type="hidden" name="userId" value="${loginUser.userId}">
+    <form action="FavoriteServlet" method="post"><input type="hidden" name="itemDetailId" value="${search.itemDetailId}"><input type="hidden" name="word" value="${word}"><input type="hidden" name="userId" value="${loginUser.userId}">
 
-    <c:if test="${sameFavoriteId ==null}">
+    <c:if test="${search.favoriteFlg == false}">
     <button type="submit" value="addFavorite" class="far fa-star" style="color: black" onclick="{alert('お気に入りに追加しました')}"></button>
     </c:if>
-    <c:if test="${sameFavoriteId !=null}">
-    <button type="submit"  value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
+    <c:if test="${search.favoriteFlg}">
+    <button type="submit" value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
     </c:if>
     </form></c:if>
+
+
   </div>
   </div>
 </div>
 
 </c:forEach></div>
-
 
 
 

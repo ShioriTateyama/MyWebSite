@@ -47,10 +47,10 @@ public class UserUpdateResultServlet extends HttpServlet {
 		System.out.println(userId);
 
 		UserDAO userDao =new UserDAO();
-		UserBeans userInfo =userDao.referUser(userId);
+		UserBeans userInfoResult =userDao.referUser(userId);
 
 		//requestスコープにインスタンスを保存
-		request.setAttribute("loginUserInfo", userInfo);
+		request.setAttribute("userInfoResult", userInfoResult);
 
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/UserUpdateResult.jsp");
 		dispatcher.forward(request, response);

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -65,13 +66,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
       </ul>
 
-
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-    </div>
+<form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
+      </form></div>
   </nav>
 </header>
 <h3 class="text-center" style="margin-top: 100px">ユーザー情報更新</h3>
@@ -79,25 +77,25 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-<form>
+<form action="UserUpdateServlet" method="post">
 <div class="row">
   <div class="col-md-4 offset-md-4">
 <p style="margin-top: 50px"></p>
-名前<input type="text" name="name" class="form-control" placeholder="Email address" required autofocus>
+名前<input type="text" name="name" class="form-control" value="${user.name}" required>
   <label for="inputPassword" class="sr-only">パスワード</label>
   <p></p>
-ログインID<input type="text" name="id" class="form-control" placeholder="Password" required>
+ログインID<input type="text" name="loginId" class="form-control" value="${user.loginId}" required>
   <div class="checkbox mb-3"></div>
   <p></p>
- 住所<input type="text" name="address" class="form-control" placeholder="Password" required>
+ 住所<input type="text" name="address" class="form-control" value="${user.address}" required>
   <div class="checkbox mb-3"></div>
 
     <p></p>
- パスワード<input type="text" name="inputPassword" class="form-control" placeholder="Password" required>
+ パスワード<input type="password" name="password" class="form-control" >
   <div class="checkbox mb-3"></div>
 
   <p></p>
- パスワード<input type="text" name="inputPassword2" class="form-control" placeholder="Password" required>
+ パスワード<input type="password" name="password2" class="form-control">
   <div class="checkbox mb-3"></div>
 
 
@@ -106,12 +104,18 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  	 <div class="row">
   	<div class="col-md-2 offset-md-5">
 
-		 <a href="UserUpdateConfirmServlet"><button class="btn btn-dark btn-block btn-lg" type="submit">ユーザー情報更新</button></a>
+		 <input type="hidden" name="userId" value="${user.userId}"><button class="btn btn-dark btn-block btn-lg" type="submit" value="update">ユーザー情報更新</button>
 
  	</div></div>
-<p></p>
+<p></p></form>
 
 
+
+  <c:if test="${errorMsg != null}" >
+	    <div class="p"><span style="color: #F00;">
+		  ${errorMsg}
+		</span></div>
+	</c:if>
 
 
 

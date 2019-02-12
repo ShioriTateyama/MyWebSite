@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -68,12 +69,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       </ul>
 
 
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-    </div>
+     <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
+      </form></div>
   </nav>
 </header>
 
@@ -90,30 +89,30 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <tbody>
     <tr>
       <th scope="row">名前</th>
-      <td>楯山詩織</td>
+      <td>${userInfoResult.name}</td>
 
     </tr>
     <tr>
       <th scope="row">ログインID</th>
-      <td>Jacob</td>
+      <td>${userInfoResult.loginId}</td>
 
     </tr>
     <tr>
       <th scope="row">住所</th>
-      <td >埼玉県春日部市豊町１−１８−４</td>
+      <td >${userInfoResult.address}</td>
 
     </tr>
      <tr>
       <th scope="row">パスワード</th>
-      <td >＊＊＊</td>
+      <td >${userInfoResult.password}</td>
 
     </tr>
   </tbody>
 </table>
 </div>
 <p  class="text-center" style= "margin-top: 40px">上記内容で登録しました</p>
-
-  <a href="UserDataServlet"><button type="button" class="btn btn-secondary" style="margin-top: 60px">ユーザー情報へ</button></a>
+<form action="UserDataServlet?userId=${userInfoResult.userId}" method="post">
+  <button type="submit" class="btn btn-secondary" style="margin-top: 60px">ユーザー情報へ</button></form>
 
 
 

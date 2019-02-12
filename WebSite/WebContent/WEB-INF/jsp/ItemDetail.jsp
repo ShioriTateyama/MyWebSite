@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -83,25 +84,26 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 <div class="btn-group" style= "margin-top: 100px;margin-left:40px">
-<form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+<form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
       </form></div>
 
 
 
 <div class="row">
 <div class="col">
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 30rem;margin-left:400px ;margin-top: 50px">
+<div id="carouselExampleControls" class="carousel slide data-ride" style="width: 30rem;margin-left:400px ;margin-top: 50px">
+
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -117,15 +119,16 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="col">
   <div style= "margin-top: 200px">
-    <h3>ウォッシュテイストタオル（２枚セット）</h3>
-    <h3>￥2590</h3>
-  </div>
+    <h3>${itemDetailData.itemName}</h3>
+    <h3>${itemDetailData.price}円</h3>
+    <h3>在庫：${itemDetailData.stock}</h3>
 
+  </div>
 <div class="row">
 <div class="col-md-2 offset-md-5">
 	<form>
 	<div class="form-group">
-    	<label for="exampleFormControlSelect1">数量</label>
+    	<label for="exampleFormControlSelect1"></label>
     	<select class="form-control" id="exampleFormControlSelect1">
       		<option>1</option>
       		<option>2</option>
@@ -150,14 +153,25 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <div class="row">
 <div class="col-md-4 offset-md-4">
   	<button class="btn btn-dark btn-block" type="submit">買い物カゴに追加する</button>
-  	<p><a href="#" class="far fa-star" style="font-size: 30px;margin-top: 10px; color:black" onclick="{alert('お気に入りに追加しました')}"></a></p>
+
+
+  	<form action="FavoriteServlet" method="post">
+  	<input type="hidden" name="itemDetailId" value="${itemDetailData.itemDetailId}"><input type="hidden" name="userId" value="${loginUser.userId}"><input type="hidden" name="favorite" value="favorite">
+  	<c:if test="${itemDetailData.favoriteFlg == false}">
+    <button type="submit" value="addFavorite" class="far fa-star" style="color: black" onclick="{alert('お気に入りに追加しました')}"></button>
+    </c:if>
+    <c:if test="${itemDetailData.favoriteFlg}">
+    <button type="submit" value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
+    </c:if>
+    </form>
+
 </div>
   	</div>
 
   	<div class="row">
 <div class="col-md-6 offset-md-3" style= "margin-top: 100px">
-  	<p>特別仕上げの「ガーメントダイ」により、色のバリエーションが本製品の特性となり、他には2枚とないタオルに仕上がっています。2枚セット</p>
-<p>重量：480g/m2</p>
+  	<p>${itemDetailData.detail}</p>
+
 </div>
   	</div>
 
