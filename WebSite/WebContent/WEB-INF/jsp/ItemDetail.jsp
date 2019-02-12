@@ -121,28 +121,37 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <div style= "margin-top: 200px">
     <h3>${itemDetailData.itemName}</h3>
     <h3>${itemDetailData.price}円</h3>
-    <h3>在庫：${itemDetailData.stock}</h3>
+
 
   </div>
+
+  <form action="CartServlet" method="post" style="margin-top: 20px">
 <div class="row">
 <div class="col-md-2 offset-md-5">
-	<form>
-	<div class="form-group">
-    	<label for="exampleFormControlSelect1"></label>
-    	<select class="form-control" id="exampleFormControlSelect1">
-      		<option>1</option>
-      		<option>2</option>
-      		<option>3</option>
-      		<option>4</option>
-      		<option>5</option>
-       		<option>6</option>
-       	 	<option>7</option>
-         	<option>8</option>
-          	<option>9</option>
-           	<option>10</option>
-    	</select>
-  	</div>
-  	</form>
+
+<c:if test="${itemDetailData.categoryId !=3 }">
+
+
+    	数量<input type="number" name="example" min="1" max="30" value="0">
+    	</c:if>
+
+    	<c:if test="${itemDetailData.categoryId ==3 }">
+<div class="form-group">
+    <label for="exampleFormControlSelect1">サイズ</label>
+    <select name="sizeId" class="form-control" id="exampleFormControlSelect1">
+      <option value="20">S</option>
+      <option value="15">M</option>
+      <option value="16">L</option>
+      <option value="17">XL</option>
+
+    </select>
+  </div>
+    	数量<input type="number" name="example" min="1" max="30" value="0">
+    	</c:if>
+
+
+
+
   	</div>
   	</div>
 
@@ -152,11 +161,14 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="row">
 <div class="col-md-4 offset-md-4">
-  	<button class="btn btn-dark btn-block" type="submit">買い物カゴに追加する</button>
+
+  	<button class="btn btn-dark btn-block" type="submit" style= "margin-top: 20px">買い物カゴに追加する</button></div>
+  	</div></form>
 
 
-  	<form action="FavoriteServlet" method="post">
+  	<form action="FavoriteServlet" method="post" style="margin-top: 50px">
   	<input type="hidden" name="itemDetailId" value="${itemDetailData.itemDetailId}"><input type="hidden" name="userId" value="${loginUser.userId}"><input type="hidden" name="favorite" value="favorite">
+  	お気に入り<p></p>
   	<c:if test="${itemDetailData.favoriteFlg == false}">
     <button type="submit" value="addFavorite" class="far fa-star" style="color: black" onclick="{alert('お気に入りに追加しました')}"></button>
     </c:if>
@@ -165,11 +177,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     </c:if>
     </form>
 
-</div>
-  	</div>
+
 
   	<div class="row">
-<div class="col-md-6 offset-md-3" style= "margin-top: 100px">
+<div class="col-md-6 offset-md-3" style= "margin-top: 20px">
   	<p>${itemDetailData.detail}</p>
 
 </div>

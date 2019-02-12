@@ -132,13 +132,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <hr width="150%">
 
-    数量<input type="text" name="quantity" placeholder="3">
-  </div><a href="#" class="badge badge-dark">削除</a>
+    数量<input type="number" name="example" min="1" max="30" value="0">
   <p></p>
 
 <div class="d-inline-block">
 
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
+<div id="carouselExampleControls" class="carousel slide data-ride" style="width: 8rem">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
