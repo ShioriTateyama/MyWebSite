@@ -71,7 +71,6 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-      </ul>
 
 
  <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
@@ -80,7 +79,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       </form></div>
 
 
-    </div>
+
   </nav>
 </header>
 
@@ -96,18 +95,19 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="row">
 <div class="col-6">
+<c:forEach var="cart" items="${cart}" >
 <div class="d-inline-block">
 
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
+<div id="carouselExampleControls" class="carousel slide data-ride=" style="width: 8rem">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/${cart.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/${cart.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/${cart.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -125,126 +125,55 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
     <div class="d-inline-block">
 
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
+    ${cart.itemName}<pre></pre>
+   ${cart.price}
 
 
 
 
 <hr width="150%">
 
-    数量:3
+    数量:${cart.quantity}
   </div>
   <p></p>
 
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
-
-
-
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量:3
-  </div>
-  <p></p>
-
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
-
-
-
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量：3
-  </div>
-  <p></p>
-
-  </div>
-
+</c:forEach></div>
 
 <div class="col">
  <div class="card" style="width: 40rem;margin-top:10px">
   <div class="card-body">
     <h2 class="card-title" style="margin-top:60px;margin-bottom:30px">注文内容</h2>
-    <p style="margin-top:60px;margin-bottom:30px">(3商品:合計9点)</p>
+    <p style="margin-top:60px;margin-bottom:30px">(${buyConfirm.totalItemQuantity}商品:合計${buyConfirm.alllItemQuantity}点)</p>
     <div class="card-text">
 
+<c:if test="${buyConfirm.totalPrice >=10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:¥9999</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyConfirm.totalPrice}円</h5>
     <p></p>
-    <h5 style="margin-top:60px;margin-bottom:30px">送料:¥600</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">送料:0円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">合計:¥10599</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyConfirm.totalPrice}円</h5>
+</c:if>
 
+<c:if test="${buyConfirm.totalPrice <10000}">
+    <p></p>
+    <hr>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyConfirm.totalPrice-500}円</h5>
+    <p></p>
+    <h5 style="margin-top:60px;margin-bottom:30px">送料:500円</h5>
+    <p></p>
+    <hr>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyConfirm.totalPrice}円</h5>
+</c:if>
 
 
     <a href="#" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</a>
   </div>
 </div>
 </div>
-</div>
+</div></div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

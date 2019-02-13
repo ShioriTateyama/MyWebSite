@@ -125,14 +125,19 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   </div>
 
-  <form action="CartServlet" method="post" style="margin-top: 20px">
+  <form action="ItemAddServlet" method="post" style="margin-top: 20px">
+
+  <input type="hidden" name="itemDetailId" value="${itemDetailData.itemDetailId}">
+
+  <input type="hidden" name="categoryId" value="${itemDetailData.categoryId}">
+
 <div class="row">
 <div class="col-md-2 offset-md-5">
 
 <c:if test="${itemDetailData.categoryId !=3 }">
+	<input type="hidden" name="sizeId" value="${itemDetailData.sizeId}">
 
-
-    	数量<input type="number" name="example" min="1" max="30" value="0">
+    	数量<input type="number" name="quantity" min="1" max="30" value="0">
     	</c:if>
 
     	<c:if test="${itemDetailData.categoryId ==3 }">
@@ -146,7 +151,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
     </select>
   </div>
-    	数量<input type="number" name="example" min="1" max="30" value="0">
+    	数量<input type="number" name="quantity" min="1" max="30" value="0">
     	</c:if>
 
 
@@ -165,7 +170,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   	<button class="btn btn-dark btn-block" type="submit" style= "margin-top: 20px">買い物カゴに追加する</button></div>
   	</div></form>
 
-
+<c:if test="${loginUser !=null}">
   	<form action="FavoriteServlet" method="post" style="margin-top: 50px">
   	<input type="hidden" name="itemDetailId" value="${itemDetailData.itemDetailId}"><input type="hidden" name="userId" value="${loginUser.userId}"><input type="hidden" name="favorite" value="favorite">
   	お気に入り<p></p>
@@ -175,7 +180,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <c:if test="${itemDetailData.favoriteFlg}">
     <button type="submit" value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
     </c:if>
-    </form>
+    </form></c:if>
 
 
 

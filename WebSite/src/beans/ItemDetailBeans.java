@@ -29,7 +29,26 @@ public class ItemDetailBeans implements Serializable{
 	private boolean favoriteFlg;
 	private int quantity;
 
+	public ItemDetailBeans(int itemDetailId,int sizeId,int quantity) {
+		this.itemDetailId=itemDetailId;
+		this.sizeId=sizeId;
+		this.quantity=quantity;
+	}
 
+	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock, String sizeName, int sizeId, List<String> fileNames,int quantity) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeName=sizeName;
+		this.sizeId=sizeId;
+		this.fileName=fileNames;
+		this.quantity=quantity;
+
+	}
 
 	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
 			int stock, String sizeName, int sizeId, List<String> fileNames) {
@@ -58,6 +77,21 @@ public class ItemDetailBeans implements Serializable{
 		this.favoriteFlg = favoriteFlg;
 	}
 	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock, String sizeName, int sizeId, List<String> fileNames, boolean favoriteFlg,int quantity) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeName=sizeName;
+		this.sizeId=sizeId;
+		this.fileName=fileNames;
+		this.favoriteFlg = favoriteFlg;
+		this.quantity=quantity;
+	}
+
+	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
 			int stock, String sizeName, int sizeId, List<String> fileNames, boolean favoriteFlg) {
 		this.itemDetailId=itemDetailId;
 		this.itemName=itemName;
@@ -69,8 +103,8 @@ public class ItemDetailBeans implements Serializable{
 		this.sizeId=sizeId;
 		this.fileName=fileNames;
 		this.favoriteFlg = favoriteFlg;
-	}
 
+	}
 	public int getItemDetailId() {
 		return itemDetailId;
 	}

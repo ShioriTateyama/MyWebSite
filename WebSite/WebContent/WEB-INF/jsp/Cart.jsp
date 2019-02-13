@@ -83,7 +83,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   </nav>
 </header>
 
-<h3 class="text-center" style="margin-top: 100px;margin-bottom:50px">買い物かご</h3>
+<h3 class="text-center" style="margin-top: 100px;margin-bottom:30px">買い物かご</h3>
+<c:if test="${cartData.totalItemQuantity != 0}">
+
+<p class="text-center" style="margin-top: 30px;margin-bottom:50px"><ins>1万円以上の購入で送料無料</ins><p></c:if>
+<c:if test="${cartData.totalItemQuantity == 0}">
+<h2 class="text-center" style="margin-top: 200px;margin-bottom:50px">${cartActionMessage}</h2></c:if>
 
 
 
@@ -93,20 +98,30 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
+
+
+<c:forEach var="item" items="${cart}" >
+
+<div class="container" style="margin-top: 30px">
 <div class="row">
-<div class="col-6">
-<div class="d-inline-block">
+    <div class="col-md-8 offset-md-2">
+<table class="table">
 
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
+  <tbody>
+
+    <tr>
+
+    <td><div id="carouselExampleControls" class="carousel slide data-ride=" style="width: 8rem">
+
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/${item.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/${item.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/${item.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -118,128 +133,36 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <span class="sr-only">Next</span>
   </a>
   </div>
-  </div>
+  </td>
 
+      <td> <pre></pre><pre></pre><pre></pre>${item.itemName}<pre></pre>
+      <c:if test="${item.categoryId != 4}">
+      ${item.sizeName}</c:if><pre></pre>
+   ${item.price}円</td>
 
-
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量<input type="number" name="example" min="1" max="30" value="0">
+   <td><form action="BuyConfirmServlet" method="post">
+    <pre></pre><pre></pre><pre></pre>数量<input type="number" name="example" min="1" max="30" value="${item.quantity}"></form>
   <p></p>
-
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
+  <form action="ItemDeleteServlet" method="post"><input type="hidden" name="itemDetailId" value="${item.itemDetailId}">
+  <button  type="submit" class="badge badge-dark" value="delete" name="delete">削除</button></form></td>
 
 
+    </tr>
 
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量<input type="text" name="quantity" placeholder="3">
-  </div><a href="#" class="badge badge-dark">削除</a>
-  <p></p>
-
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
-
-
-
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量<input type="text" name="quantity" placeholder="3">
-  </div><a href="#" class="badge badge-dark">削除</a>
-  <p></p>
-
-  </div>
-
-
-<div class="col">
- <div class="card" style="width: 40rem;margin-top:30px">
-  <div class="card-body">
-    <h2 class="card-title" style="margin-top:60px;margin-bottom:30px">注文内容</h2>
-    <p style="margin-top:60px;margin-bottom:30px">(3商品)</p>
-    <div class="card-text">
-
-    <p></p>
-    <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:¥9999</h5>
+  </tbody>
+</table>
+</div></div></div></c:forEach>
 
 
 
 
 
-    <a href="#" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入確認</a>
-  </div>
-</div>
-</div>
-</div>
+<c:if test="${cartData.totalItemQuantity != 0}">
+
+<form action="BuyConfirmServlet" method="post"><input type="hidden" value="${loginUser.userId}" name="userId">
+    <button type="submit" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</button></form>
+
+    </c:if>
 
 
 
