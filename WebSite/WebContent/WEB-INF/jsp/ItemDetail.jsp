@@ -45,8 +45,24 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
           <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
+       <li class="nav-item">
+
+
+        <c:if test="${loginUser == null}" >
     			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    	</c:if>
+
+    	<form action="UserDataServlet" method="post">
+
+    	<c:if test="${loginUser !=null}">
+    	<a class="fas fa-user-circle"class="nav-link" href="UserDataServlet?userId=${loginUser.userId}" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px">
+
+    	</a>
+    	</c:if>
+
+    	</form>
+
+
   			</li>
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
@@ -137,7 +153,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <c:if test="${itemDetailData.categoryId !=3 }">
 	<input type="hidden" name="sizeId" value="${itemDetailData.sizeId}">
 
-    	数量<input type="number" name="quantity" min="1" max="30" value="0">
+    	数量<input type="number" name="quantity" min="1" max="30" value="1">
     	</c:if>
 
     	<c:if test="${itemDetailData.categoryId ==3 }">
@@ -151,7 +167,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
     </select>
   </div>
-    	数量<input type="number" name="quantity" min="1" max="30" value="0">
+    	数量<input type="number" name="quantity" min="1" max="30" value="1">
     	</c:if>
 
 

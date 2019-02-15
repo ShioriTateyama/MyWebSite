@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.BuyBeans;
+import beans.BuyDetailBeans;
 import beans.ItemDetailBeans;
 
 /**
@@ -54,7 +54,7 @@ public class CartServlet extends HttpServlet {
 
 		int quantity= cart.size();
 
-		BuyBeans cartData = new BuyBeans(totalPrice,quantity);
+		BuyDetailBeans cartData = new BuyDetailBeans(totalPrice,quantity);
 
 
 

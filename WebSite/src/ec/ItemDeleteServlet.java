@@ -31,35 +31,30 @@ public class ItemDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		// URLからGETパラメータとしてIDを受け取る
-		String itemDId = request.getParameter("itemDetailId");
-		int itemDetailId =Integer.parseInt(itemDId);
-		// 確認用：idをコンソールに出力
-		System.out.println(itemDetailId);
+				String id = request.getParameter("itemDetailId");
+				int itemDetailId =Integer.parseInt(id);
+				// 確認用：idをコンソールに出力
+				System.out.println(itemDetailId);
 
-		String delete = request.getParameter("delete");
 
-		HttpSession session = request.getSession();
-		//カートを取得
-		ArrayList<ItemDetailBeans> cart = (ArrayList<ItemDetailBeans>) session.getAttribute("cart");
 
-		if(delete != null) {
-			for (ItemDetailBeans cartInItem : cart) {
-				if (cartInItem.getItemDetailId() == itemDetailId) {
-					cart.remove(cartInItem);
-					break;
-				}
-			}
-		}
+				HttpSession session = request.getSession();
+				//カートを取得
+				ArrayList<ItemDetailBeans> cart = (ArrayList<ItemDetailBeans>) session.getAttribute("cart");
+
+
+					for (ItemDetailBeans cartInItem : cart) {
+						if (cartInItem.getItemDetailId() == itemDetailId) {
+							cart.remove(cartInItem);
+							break;
+
+						}
+					}
 					response.sendRedirect("CartServlet");
+
 	}
+
+
+
 }

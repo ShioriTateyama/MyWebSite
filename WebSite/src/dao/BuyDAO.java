@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,25 +19,38 @@ public class BuyDAO {
  * @param userId
  * @param totalPrice
  * @param cteateDate
+ * @return
  */
-	public void insertBuyData(String userId,int totalPrice,String cteateDate) {
+	public int insertBuyData(int userId,int totalPrice) {
+
 	    Connection conn=null;
+	    int autoIncKey = 0;
 		try {
 			//connectDB
 			conn=DBManager.getConnection();
 
-
 			//insert文
-			String sql ="INSERT INTO buy(user_Id,total_price,create_date)VALUES(?,?,now())";
+			String sql ="INSERT INTO buy(user_Id,total_price,create_date) VALUES(?,?,now())";
+
+
 			//インサート実行
 			 // SELECTを実行し、結果表を取得
-	        PreparedStatement pStmt = conn.prepareStatement(sql);
-	        pStmt.setString(1, userId);
+	        PreparedStatement pStmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+	        pStmt.setInt(1, userId);
 	        pStmt.setInt(2, totalPrice);
+	        pStmt.executeUpdate();
 
 
 
-			pStmt.executeUpdate();
+
+
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if (rs.next()) {
+				autoIncKey = rs.getInt(1);
+			}
+			System.out.println("inserting buy-datas has been completed");
+
+
 
 
 		 } catch (SQLException e) {
@@ -51,6 +65,8 @@ public class BuyDAO {
 	             }
 	         }
 	     }
+		return autoIncKey;
+
 	    }
 /**
  * 購入データをすべて得る
@@ -145,4 +161,5 @@ public class BuyDAO {
 		return null;
 
     }
+
 }

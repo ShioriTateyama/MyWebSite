@@ -10,22 +10,14 @@ public class BuyBeans implements Serializable{
 	private int userId;
 	private int totalPrice;
 	private Date createDate;
-	private int totalItemQuantity;
+	private int itemQuantity;
 	private int allItemQuantity;
 
-
-	public BuyBeans(int totalPrice,int totalItemQuantity) {
-
+	public BuyBeans(int userId,int totalPrice) {
+		this.userId=userId;
 		this.totalPrice=totalPrice;
-		this.totalItemQuantity=totalItemQuantity;
-
 	}
-	public BuyBeans(int totalPrice,int totalItemQuantity,int allItemQuantity) {
 
-		this.totalPrice=totalPrice;
-		this.totalItemQuantity=totalItemQuantity;
-		this.allItemQuantity = allItemQuantity;
-	}
 
 
 	public BuyBeans(int buyId, int userId, int totalPrice, Date createDate) {
@@ -34,6 +26,8 @@ public class BuyBeans implements Serializable{
 		this.totalPrice=totalPrice;
 		this.createDate=createDate;
 	}
+
+
 	public int getBuyId() {
 		return buyId;
 	}
@@ -60,13 +54,13 @@ public class BuyBeans implements Serializable{
 	}
 
 
-	public int getTotalItemQuantity() {
-		return totalItemQuantity;
+	public int getItemQuantity() {
+		return itemQuantity;
 	}
 
 
-	public void setTotalItemQuantity(int totalItemQuantity) {
-		this.totalItemQuantity = totalItemQuantity;
+	public void setItemQuantity(int totalItemQuantity) {
+		this.itemQuantity = totalItemQuantity;
 	}
 
 

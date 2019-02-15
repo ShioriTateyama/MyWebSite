@@ -46,7 +46,23 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
         </li>
 
         <li class="nav-item">
+
+
+        <c:if test="${loginUser == null}" >
     			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    	</c:if>
+
+    	<form action="UserDataServlet" method="post">
+
+    	<c:if test="${loginUser !=null}">
+    	<a class="fas fa-user-circle"class="nav-link" href="UserDataServlet?userId=${loginUser.userId}" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px">
+
+    	</a>
+    	</c:if>
+
+    	</form>
+
+
   			</li>
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>

@@ -45,8 +45,24 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
          <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
+       <li class="nav-item">
+
+
+        <c:if test="${loginUser == null}" >
     			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    	</c:if>
+
+    	<form action="UserDataServlet" method="post">
+
+    	<c:if test="${loginUser !=null}">
+    	<a class="fas fa-user-circle"class="nav-link" href="UserDataServlet?userId=${loginUser.userId}" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px">
+
+    	</a>
+    	</c:if>
+
+    	</form>
+
+
   			</li>
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
@@ -79,7 +95,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       </form></div>
 
 
-    </div>
+
   </nav>
 </header>
 
@@ -91,18 +107,28 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="row">
 <div class="col-6">
-<div class="d-inline-block">
+<c:forEach var="buy" items="${buyList}" >
+<div class="container" style="margin-top: 30px">
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+<table class="table">
 
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
+  <tbody>
+
+    <tr>
+
+
+<td>
+<div id="carouselExampleControls" class="carousel slide data-ride=" style="width: 8rem">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/${buy.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/${buy.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/${buy.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -114,140 +140,69 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <span class="sr-only">Next</span>
   </a>
   </div>
-  </div>
+
+  </td>
 
 
 
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
+    <td> <pre></pre><pre></pre><pre></pre>${buy.itemName}<pre></pre>
+      <c:if test="${buy.categoryId != 4}">
+      ${buy.sizeName}</c:if><pre></pre>
+   ${buy.price}円</td>
 
 
-<hr width="150%">
+ <td><pre></pre><pre></pre><pre></pre>数量：${buy.purchaseQuantity}<pre></pre>
+ ${buy.price*buy.purchaseQuantity}円
+ </td>
 
-    数量:3
-  </div>
-  <p></p>
-
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
+ </tr>
+ </tbody>
+ </table></div></div></div>
 
 
 
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量:3
-  </div>
-  <p></p>
-
-<div class="d-inline-block">
-
-<div id="carouselExampleControls" class="carousel slide data-ride="carousel" style="width: 8rem">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/towel.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/front.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/2.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  </div>
-  </div>
-
-
-
-    <div class="d-inline-block">
-
-    ウォッシュテイストタオル（２枚セット)<pre></pre>
-   ￥2590
-
-
-
-
-<hr width="150%">
-
-    数量：3
-  </div>
-  <p></p>
-
-  </div>
-
+</c:forEach></div>
 
 <div class="col">
  <div class="card" style="width: 40rem;margin-top:10px">
   <div class="card-body">
-    <h2 class="card-title" style="margin-top:30px;margin-bottom:30px">注文内容</h2>
-    <p style="margin-top:60px;margin-bottom:30px">(3商品:合計9点)</p>
+    <h2 class="card-title" style="margin-top:60px;margin-bottom:30px">注文内容</h2>
+    <p style="margin-top:60px;margin-bottom:30px">(${buy.purchaseQuantity}商品:合計${buy.allItemQuantity}点)</p>
     <div class="card-text">
 
+<c:if test="${buy.totalPrice >=10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:¥9999</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buy.totalPrice}円</h5>
     <p></p>
-    <h5 style="margin-top:60px;margin-bottom:30px">送料:¥600</h5>
-    <p></p>
-    <hr>
-    <h5 style="margin-top:60pxmargin-bottom:30px">合計:¥10599</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">送料:0円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">2019-01-22-22:50</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buy.totalPrice}円</h5>
+</c:if>
 
-
-
+<c:if test="${buy.totalPrice <10000}">
+    <p></p>
+    <hr>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buy.totalPrice-500}円</h5>
+    <p></p>
+    <h5 style="margin-top:60px;margin-bottom:30px">送料:500円</h5>
+    <p></p>
+    <hr>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buy.totalPrice}円</h5>
+</c:if>
+<hr>${buy.createDate}
 
 
 
   </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
+
+
  <a href="IndexServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px ; margin-right:30px">買い物を続ける</button></a>
-  <a href="UserDataServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px; margin-left:30px">ユーザー画面へ</button></a>
+  <a href="UserDataServlet?${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px; margin-left:30px">ユーザー画面へ</button></a>
 
 
 

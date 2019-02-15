@@ -45,9 +45,24 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
         <li class="nav-item active">
           <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
+<li class="nav-item">
 
-        <li class="nav-item">
+
+        <c:if test="${loginUser == null}" >
     			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    	</c:if>
+
+    	<form action="UserDataServlet" method="post">
+
+    	<c:if test="${loginUser !=null}">
+    	<a class="fas fa-user-circle"class="nav-link" href="UserDataServlet?userId=${loginUser.userId}" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px">
+
+    	</a>
+    	</c:if>
+
+    	</form>
+
+
   			</li>
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
@@ -96,8 +111,17 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <div class="row">
 <div class="col-6">
 <c:forEach var="cart" items="${cart}" >
-<div class="d-inline-block">
+<div class="container" style="margin-top: 30px">
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+<table class="table">
 
+  <tbody>
+
+    <tr>
+
+
+<td>
 <div id="carouselExampleControls" class="carousel slide data-ride=" style="width: 8rem">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -119,23 +143,26 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <span class="sr-only">Next</span>
   </a>
   </div>
-  </div>
+
+  </td>
 
 
 
-    <div class="d-inline-block">
-
-    ${cart.itemName}<pre></pre>
-   ${cart.price}
-
-
+    <td> <pre></pre><pre></pre><pre></pre>${cart.itemName}<pre></pre>
+      <c:if test="${cart.categoryId != 4}">
+      ${cart.sizeName}</c:if><pre></pre>
+   ${cart.price}円</td>
 
 
-<hr width="150%">
+ <td><pre></pre><pre></pre><pre></pre>数量：${cart.quantity}<pre></pre>
+ ${cart.price*cart.quantity}円
+ </td>
 
-    数量:${cart.quantity}
-  </div>
-  <p></p>
+ </tr>
+ </tbody>
+ </table></div></div></div>
+
+
 
 </c:forEach></div>
 
@@ -143,7 +170,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  <div class="card" style="width: 40rem;margin-top:10px">
   <div class="card-body">
     <h2 class="card-title" style="margin-top:60px;margin-bottom:30px">注文内容</h2>
-    <p style="margin-top:60px;margin-bottom:30px">(${buyConfirm.totalItemQuantity}商品:合計${buyConfirm.alllItemQuantity}点)</p>
+    <p style="margin-top:60px;margin-bottom:30px">(${buyConfirm.itemQuantity}商品:合計${buyConfirm.allItemQuantity}点)</p>
     <div class="card-text">
 
 <c:if test="${buyConfirm.totalPrice >=10000}">
@@ -169,7 +196,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </c:if>
 
 
-    <a href="#" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</a>
+    <a href="BuyResultServlet?userId=${loginUser.userId}" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</a>
   </div>
 </div>
 </div>

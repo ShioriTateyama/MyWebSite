@@ -40,6 +40,7 @@ public class LogoutServlet extends HttpServlet {
 
 				session.removeAttribute("loginUser");
 				session.removeAttribute("loginUserInfo");
+				session.removeAttribute("cart");
 
 				// indexのサーブレットにリダイレクト
 				response.sendRedirect("LogoutServlet");

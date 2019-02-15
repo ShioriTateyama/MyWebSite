@@ -45,8 +45,24 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
           <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
+       <li class="nav-item">
+
+
+        <c:if test="${loginUser == null}" >
     			<a class="fas fa-user-circle"class="nav-link" href="LoginServlet" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px"></a>
+    	</c:if>
+
+    	<form action="UserDataServlet" method="post">
+
+    	<c:if test="${loginUser !=null}">
+    	<a class="fas fa-user-circle"class="nav-link" href="UserDataServlet?userId=${loginUser.userId}" style="font-size: 30px; color:#FFF; margin-right: 20px;margin-left: 20px">
+
+    	</a>
+    	</c:if>
+
+    	</form>
+
+
   			</li>
   		<li class="nav-item">
     			<a  class="fas fa-shopping-cart"class="nav-link" href="CartServlet" style="font-size: 30px; color:#FFF; margin-right: 10px"><span style="margin-right: 2rem"></span></a>
@@ -84,10 +100,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </header>
 
 <h3 class="text-center" style="margin-top: 100px;margin-bottom:30px">買い物かご</h3>
-<c:if test="${cartData.totalItemQuantity != 0}">
+<c:if test="${cartData.itemQuantity != 0}">
 
 <p class="text-center" style="margin-top: 30px;margin-bottom:50px"><ins>1万円以上の購入で送料無料</ins><p></c:if>
-<c:if test="${cartData.totalItemQuantity == 0}">
+<c:if test="${cartData.itemQuantity == 0}">
 <h2 class="text-center" style="margin-top: 200px;margin-bottom:50px">${cartActionMessage}</h2></c:if>
 
 
@@ -96,7 +112,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-
+<form action="BuyConfirmServlet" method="post"><input type="hidden" name="itemDetailId" value="${item.itemDetailId}">
 
 
 
@@ -140,11 +156,15 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       ${item.sizeName}</c:if><pre></pre>
    ${item.price}円</td>
 
-   <td><form action="BuyConfirmServlet" method="post">
-    <pre></pre><pre></pre><pre></pre>数量<input type="number" name="example" min="1" max="30" value="${item.quantity}"></form>
+   <td>
+   <input type="hidden" value="${loginUser.userId}" name="userId">
+    <pre></pre><pre></pre><pre></pre>数量<input type="number" name="quantity-${item.itemDetailId}" min="1" max="30" value="${item.quantity}">
   <p></p>
-  <form action="ItemDeleteServlet" method="post"><input type="hidden" name="itemDetailId" value="${item.itemDetailId}">
-  <button  type="submit" class="badge badge-dark" value="delete" name="delete">削除</button></form></td>
+
+  <a href="ItemDeleteServlet?itemDetailId=${item.itemDetailId}">
+  <button  type="button" class="badge badge-dark" >削除</button>
+  </a>
+  </td>
 
 
     </tr>
@@ -157,12 +177,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-<c:if test="${cartData.totalItemQuantity != 0}">
 
-<form action="BuyConfirmServlet" method="post"><input type="hidden" value="${loginUser.userId}" name="userId">
-    <button type="submit" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</button></form>
+<c:if test="${cartData.itemQuantity != 0}">
 
-    </c:if>
+    <button type="submit" class="btn btn-dark btn-lg" style="margin-top:30px;margin-bottom:30px">購入</button>
+
+    </c:if></form>
 
 
 

@@ -105,6 +105,22 @@ public class ItemDetailBeans implements Serializable{
 		this.favoriteFlg = favoriteFlg;
 
 	}
+	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock, String sizeName, int sizeId, List<String> fileNames, boolean favoriteFlg,
+			int purchaceQuantity, java.sql.Date createDate, int totaolPrice, int userId) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeName=sizeName;
+		this.sizeId=sizeId;
+		this.fileName=fileNames;
+		this.favoriteFlg = favoriteFlg;
+		this.createDate = createDate;
+	}
+
 	public int getItemDetailId() {
 		return itemDetailId;
 	}
