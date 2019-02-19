@@ -113,13 +113,13 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(0)}" alt="First slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileBeans.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(1)}" alt="Second slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileBeans.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${itemDetailData.fileName.get(2)}" alt="Third slide">
+      <img class="d-block w-100" src="img/${itemDetailData.fileBeans.fileName.get(2)}" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import dao.FileDAO;
+
 
 public class ItemDetailBeans implements Serializable{
 
@@ -14,6 +16,10 @@ public class ItemDetailBeans implements Serializable{
 	private int stock;
 	private Date createDate;
 	private Date updateDate;
+
+	private FileBeans fileBeans;
+
+	private int userId;
 
 	private String itemName;
 	private int price;
@@ -29,11 +35,31 @@ public class ItemDetailBeans implements Serializable{
 	private boolean favoriteFlg;
 	private int quantity;
 
+	public ItemDetailBeans(int itemDetailId,int userId) {
+		this.itemDetailId=itemDetailId;
+		this.userId=userId;
+
+	}
+
 	public ItemDetailBeans(int itemDetailId,int sizeId,int quantity) {
 		this.itemDetailId=itemDetailId;
 		this.sizeId=sizeId;
 		this.quantity=quantity;
 	}
+
+	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock,  int sizeId, int colorId) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeId=sizeId;
+		this.colorId=colorId;
+
+	}
+
 
 	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
 			int stock, String sizeName, int sizeId, List<String> fileNames,int quantity) {
@@ -220,6 +246,18 @@ public class ItemDetailBeans implements Serializable{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public FileBeans getFileBeans() {
+		FileDAO fileDao =new FileDAO();
+		return fileDao.getFile(this.itemDetailId);
 	}
 
 }

@@ -1,11 +1,11 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class BuyDAO {
 			conn=DBManager.getConnection();
 
 			//insert文
-			String sql ="INSERT INTO buy(user_Id,total_price,create_date) VALUES(?,?,now())";
+			String sql ="INSERT INTO buy(user_id,total_price,create_date) VALUES(?,?,now())";
 
 
 			//インサート実行
@@ -82,7 +82,7 @@ public class BuyDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "SELECT * FROM buy WHERE user_id =?";
+            String sql = "SELECT * FROM buy WHERE user_id =? ORDER BY buy_id DESC";
 
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, userId);
@@ -92,11 +92,11 @@ public class BuyDAO {
             // Userインスタンスに設定し、ArrayListインスタンスに追加
             while (rs.next()) {
                 int buyId = rs.getInt("buy_id");
-                int userIdData = rs.getInt("user_Id");
-                int totalPrice = rs.getInt("name");
-                Date create_date = rs.getDate("create_date");
 
-                BuyBeans buy = new BuyBeans(buyId, userIdData, totalPrice, create_date);
+                int totalPrice = rs.getInt("total_price");
+                Timestamp createDate = rs.getTimestamp("create_date");
+
+                BuyBeans buy = new BuyBeans(buyId, userId, totalPrice, createDate);
 
                 buyList.add(buy);
             }
@@ -134,12 +134,13 @@ public class BuyDAO {
             ResultSet rs = pStmt.executeQuery();
 
             rs.next();//nextmethodの戻り値は新しい現在の行が有効である場合はtrue、行がそれ以上存在しない場合はfalse
-            int buyIdData = rs.getInt("buy_id");
-            int userIdData = rs.getInt("user_Id");
-            int totalPrice = rs.getInt("name");
-            Date create_date = rs.getDate("create_date");
 
-            BuyBeans buy = new BuyBeans(buyIdData, userIdData, totalPrice, create_date);
+            int userId= rs.getInt("user_Id");
+            int totalPrice = rs.getInt("total_price");
+            Timestamp createDate = rs.getTimestamp("create_date");
+
+
+            BuyBeans buy = new BuyBeans(buyId, userId, totalPrice, createDate);
 
             return buy;
 

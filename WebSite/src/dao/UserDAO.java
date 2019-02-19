@@ -138,7 +138,7 @@ public class UserDAO {
 
 
 				//insert文
-				String sql ="INSERT INTO user(login_Id,name,address,password,create_date,up_date)VALUES(?,?,?,?,now(),now())";
+				String sql ="INSERT INTO user(login_id,name,address,password,create_date,update_date)VALUES(?,?,?,?,now(),now())";
 				//インサート実行
 				 // SELECTを実行し、結果表を取得
 		        PreparedStatement pStmt = conn.prepareStatement(sql);

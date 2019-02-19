@@ -104,22 +104,22 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <tbody>
     <tr>
       <th scope="row">名前</th>
-      <td>楯山詩織</td>
+      <td>${resist.name}</td>
 
     </tr>
     <tr>
       <th scope="row">ログインID</th>
-      <td>Jacob</td>
+      <td>${resist.loginId}</td>
 
     </tr>
     <tr>
       <th scope="row">住所</th>
-      <td >埼玉県春日部市豊町１−１８−４</td>
+      <td >${resist.address}</td>
 
     </tr>
      <tr>
       <th scope="row">パスワード</th>
-      <td >＊＊＊</td>
+      <td >${resist.password}</td>
 
     </tr>
   </tbody>
@@ -127,7 +127,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 <p  class="text-center" style= "margin-top: 40px">上記内容で登録しました。</p>
 
-  <a href="UserDataServlet"><button type="button" class="btn btn-secondary" style="margin-top: 60px">ユーザー情報へ</button></a>
+  <a href="LoginServlet"><button type="button" class="btn btn-secondary" style="margin-top: 60px">ログイン画面へ</button></a>
 
 
 

@@ -2,6 +2,7 @@ package beans;
 
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BuyBeans implements Serializable{
@@ -52,6 +53,10 @@ public class BuyBeans implements Serializable{
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	public String getFormatDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(createDate);
+	}
 
 
 	public int getItemQuantity() {
@@ -72,6 +77,7 @@ public class BuyBeans implements Serializable{
 	public void setAllItemQuantity(int allItemQuantity) {
 		this.allItemQuantity = allItemQuantity;
 	}
+
 
 
 

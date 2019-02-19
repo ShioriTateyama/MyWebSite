@@ -26,62 +26,31 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "SELECT * FROM item_detail "+
-            "INNER JOIN item ON item_detail.item_id = item.item_id "+
-            "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
-            "INNER JOIN size ON size.size_id=item_detail.size_id "+
-            "LEFT OUTER JOIN favorite ON item_detail.item_detail_id = favorite.item_detail_id "+
-            "WHERE category_id =? ORDER BY file.item_detail_id DESC";
-
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=? ";
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, categoryId);
-
 	        ResultSet rs = pStmt.executeQuery();
-
-	        //item_detail_idは絶対に１からはじまるので、item_detail_idが正の時にインスタンスをつくるため
-	        int itemDetailId =-1;
-            String itemName= "";
-            int price = 0;
-            int categoryIdData=0;
-            String detail ="";
-            String sizeName="";
-            int stock=0;
-            List<String> fileNames=null;
-            boolean favoriteFlg = false;
 
 
 			while (rs.next()) {
 
 
-				//②item_detail_idが次の数に切り替わったら、インスタンスを作成する
-				if (itemDetailId != rs.getInt("item_detail_id")) {
-					if (itemDetailId >= 0) {
-						//item_detail_idごとにインスタンス作成
-						ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryIdData,
-								detail, stock,sizeName,fileNames, favoriteFlg);
-						ItemDetailList.add(item);
 
-						favoriteFlg = false;
-					}
 				//①値を取得する
-					itemDetailId = rs.getInt("item_detail_id");
-					itemName = rs.getString("item_name");
-					price = rs.getInt("price");
-					categoryIdData = rs.getInt("category_id");
-					detail = rs.getString("detail");
-					sizeName = rs.getString("size_name");
-					stock = rs.getInt("stock");
+					int itemDetailId = rs.getInt("item_detail_id");
+					String itemName = rs.getString("item_name");
+					int price = rs.getInt("price");
+					String detail = rs.getString("detail");
 
-					if(rs.getInt("favorite_id") != 0) {
-						favoriteFlg = true;
-					}
+					int stock = rs.getInt("stock");
+					int sizeId= rs.getInt("size_id");
+					int colorId=rs.getInt("color_id");
 
+					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
+							detail, stock,sizeId,colorId);
+					ItemDetailList.add(item);
 
-					fileNames = new ArrayList<>();
-				}
-				fileNames.add(rs.getString("file_name"));
 			}
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -265,63 +234,38 @@ public class ItemDetailDAO {
 	public ItemDetailBeans selectItemDetailDatabyItemDetailId(int itemDetailId) {
         Connection conn = null;
 
+
         try {
             // データベースへ接続
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "SELECT * FROM item_detail "+
-                    "INNER JOIN item ON item_detail.item_id = item.item_id "+
-                    "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
-                    "INNER JOIN size ON size.size_id=item_detail.size_id "+
-
-                    "LEFT OUTER JOIN favorite ON item_detail.item_detail_id = favorite.item_detail_id "+
-                    "WHERE item_detail.item_detail_id =? ORDER BY file.item_detail_id DESC";
-
-
-             // SELECTを実行し、結果表を取得
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=? ";
             PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, itemDetailId);
+	        pStmt.setInt(1,itemDetailId);
+	        ResultSet rs = pStmt.executeQuery();
 
 
-            ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
 
-            int itemDetailIdData =-1;
-            String itemName= "";
-            int price = 0;
-            int categoryIdData=0;
-            String detail ="";
-            String sizeName="";
-            int sizeId=0;
-            int stock=0;
-            List<String> fileNames=null;
-            boolean favoriteFlg = false;
 
-            while (rs.next()) {
-				//②item_detail_idが次の数に切り替わったら、インスタンスを作成する
-				if (itemDetailIdData != rs.getInt("item_detail_id")) {
+
 				//①値を取得する
-					itemDetailIdData = rs.getInt("item_detail_id");
-					itemName = rs.getString("item_name");
-					price = rs.getInt("price");
-					categoryIdData = rs.getInt("category_id");
-					detail = rs.getString("detail");
-					sizeName = rs.getString("size_name");
-					sizeId=rs.getInt("size_id");
-					stock = rs.getInt("stock");
 
-					if(rs.getInt("favorite_id") != 0) {
-						favoriteFlg = true;
-					}
+					String itemName = rs.getString("item_name");
+					int price = rs.getInt("price");
+					String detail = rs.getString("detail");
+					int categoryId= rs.getInt("category_id");
+					int stock = rs.getInt("stock");
+					int sizeId= rs.getInt("size_id");
+					int colorId=rs.getInt("color_id");
 
 
-					fileNames = new ArrayList<>();
-				}
-				fileNames.add(rs.getString("file_name"));
+					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
+							detail, stock,sizeId,colorId);
+
+					return item;
 			}
-			ItemDetailBeans item = new ItemDetailBeans(itemDetailIdData, itemName, price, categoryIdData,
-					detail, stock,sizeName,sizeId,fileNames, favoriteFlg);
-			return item;
 
         } catch (SQLException e) {
             e.printStackTrace();

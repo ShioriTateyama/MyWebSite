@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.UserBeans;
+import dao.UserDAO;
+
 /**
  * Servlet implementation class ResistResultServlet
  */
@@ -36,6 +39,18 @@ public class ResistResultServlet extends HttpServlet {
 					response.sendRedirect("UserDataServlet");
 					return;
 				}
+
+				UserBeans resist=(UserBeans) session.getAttribute("resist");
+				String loginId=resist.getLoginId();
+				String name=resist.getName();
+				String address=resist.getAddress();
+				String password=resist.getPassword();
+
+
+				UserDAO userDao =new UserDAO();
+
+
+					userDao.resisterUser(loginId,name, address,password);
 				//resistResultjspにforward
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ResistResult.jsp");
 				dispatcher.forward(request, response);

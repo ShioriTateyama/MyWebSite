@@ -99,7 +99,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-  <a href="UserDataServlet"><button type="button" class="btn btn-secondary" style="margin-top: 100px">ユーザー情報へ戻る</button></a>
+  <a href="UserDataServlet?userId=${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 100px">ユーザー情報へ戻る</button></a>
    </div>
 
 
@@ -111,32 +111,23 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
  <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col"></th>
+      <th scope="col">詳細</th>
       <th scope="col">購入日時</th>
       <th scope="col">金額</th>
 
     </tr>
   </thead>
   <tbody>
+  <c:forEach var="buy" items="${buyData}" >
     <tr>
-      <th scope="row"><a href="UserBuyHistoryDetail?buy_id=？" class="btn-floating btn waves-effect waves-light ">詳細<i class="far fa-hand-point-right"></i></a></th>
-      <td>2019-01-22 22:29</td>
-      <td>9990円</td>
+      <th scope="row"><a href="UserBuyHistoryDetailServlet?buyId=${buy.buyId}" class="btn-floating btn waves-effect waves-light "><i class="far fa-hand-point-right"></i></a></th>
+      <td>${buy.formatDate}</td>
+      <td>${buy.totalPrice}円</td>
 
 
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
+    </c:forEach>
 
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-
-    </tr>
   </tbody>
 
 

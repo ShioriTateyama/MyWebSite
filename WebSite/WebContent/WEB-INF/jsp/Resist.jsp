@@ -103,15 +103,15 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 名前<input type="text" name="name" class="form-control" placeholder="Name" required autofocus>
   <label for="inputPassword" class="sr-only">パスワード</label>
   <p></p>
-ログインID<input type="text" name="id" class="form-control" placeholder="Id" required autofocus>
+ログインID<input type="text" name="loginId" class="form-control" placeholder="Id" required autofocus>
   <div class="checkbox mb-3"></div>
   <p></p>
- 住所<input type="text" id="address" class="form-control" placeholder="Address" required autofocus>
+ 住所<input type="text" name="address" class="form-control" placeholder="Address" required autofocus>
   <div class="checkbox mb-3"></div>
   <p></p>
- パスワード<input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
+ パスワード<input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
   <div class="checkbox mb-3"></div>
-   パスワード(確認用)<input type="password" id="inputPassword2" class="form-control" placeholder="Password" required autofocus>
+   パスワード(確認用)<input type="password"  name="password2" id="inputPassword2" class="form-control" placeholder="Password" required autofocus>
   <div class="checkbox mb-3"></div>
 
 

@@ -1,8 +1,9 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+
+import dao.BuyDAO;
+import dao.ItemDetailDAO;
 
 
 public class BuyDetailBeans implements Serializable{
@@ -16,47 +17,8 @@ public class BuyDetailBeans implements Serializable{
 	private int allItemQuantity;
 	private int userId;
 
-
-
-	private int itemId;
-	private int colorId;
-	private int sizeId;
-	private int stock;
-	private Date createDate;
-
-	private String itemName;
-	private int price;
-	private int categoryId;
-	private String detail;
-
-	private int fileId;
-	private List<String> fileName;
-
-	private String sizeName;
-
-
-	private boolean favoriteFlg;
-
-	public BuyDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
-			int stock, String sizeName, int sizeId, List<String> fileNames,
-			int purchaceQuantity, java.sql.Date createDate, int totalPrice,int allItemQuantity) {
-		this.itemDetailId=itemDetailId;
-
-		this.itemName=itemName;
-		this.price=price;
-		this.categoryId=categoryId;
-		this.detail=detail;
-		this.stock=stock;
-		this.sizeName=sizeName;
-		this.sizeId=sizeId;
-		this.fileName=fileNames;
-
-		this.createDate = createDate;
-		this.totalPrice=totalPrice;
-
-		this.allItemQuantity = allItemQuantity;
-
-	}
+	private ItemDetailBeans itemDetailBeans;
+	private BuyBeans buyBeans;
 
 
 	public BuyDetailBeans(int buyDetailId, int buyId, int itemDetailId, int purchaseQuantity) {
@@ -78,6 +40,9 @@ public class BuyDetailBeans implements Serializable{
 		this.itemQuantity=itemQuantity;
 		this.allItemQuantity = allItemQuantity;
 	}
+
+
+
 	public int getBuyDetailId() {
 		return buyDetailId;
 	}
@@ -122,84 +87,7 @@ public class BuyDetailBeans implements Serializable{
 	public void setAllItemQuantity(int allItemQuantity) {
 		this.allItemQuantity = allItemQuantity;
 	}
-	public int getItemId() {
-		return itemId;
-	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	public int getColorId() {
-		return colorId;
-	}
-	public void setColorId(int colorId) {
-		this.colorId = colorId;
-	}
-	public int getSizeId() {
-		return sizeId;
-	}
-	public void setSizeId(int sizeId) {
-		this.sizeId = sizeId;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	public int getFileId() {
-		return fileId;
-	}
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
-	}
-	public List<String> getFileName() {
-		return fileName;
-	}
-	public void setFileName(List<String> fileName) {
-		this.fileName = fileName;
-	}
-	public String getSizeName() {
-		return sizeName;
-	}
-	public void setSizeName(String sizeName) {
-		this.sizeName = sizeName;
-	}
-	public boolean isFavoriteFlg() {
-		return favoriteFlg;
-	}
-	public void setFavoriteFlg(boolean favoriteFlg) {
-		this.favoriteFlg = favoriteFlg;
-	}
+
 
 
 	public int getUserId() {
@@ -209,6 +97,15 @@ public class BuyDetailBeans implements Serializable{
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public ItemDetailBeans getItemDetailBeans() {
+		ItemDetailDAO dao = new ItemDetailDAO();
+		return dao.selectItemDetailDatabyItemDetailId(this.itemDetailId);
+	}
+	public BuyBeans getBuyBeans() {
+		BuyDAO buyDao =new BuyDAO();
+		return buyDao.selectBuyData(this.buyId);
 	}
 
 }

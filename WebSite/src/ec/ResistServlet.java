@@ -72,7 +72,33 @@ public class ResistServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 					return;
 
-				}if(loginId.isEmpty()||password.isEmpty()||password2.isEmpty()||name.isEmpty()||address.isEmpty()) {
+				}if(loginId.isEmpty()){
+					request.setAttribute("error", "未入力の項目があります。");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
+					dispatcher.forward(request, response);
+					return;
+
+				}if(password.isEmpty()) {
+					request.setAttribute("error", "未入力の項目があります。");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
+					dispatcher.forward(request, response);
+					return;
+
+				}if(password2.isEmpty()) {
+					request.setAttribute("error", "未入力の項目があります。");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}if(name.isEmpty()) {
+
+					request.setAttribute("error", "未入力の項目があります。");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
+					dispatcher.forward(request, response);
+					return;
+
+
+				}if(address.isEmpty()) {
+
 
 					request.setAttribute("error", "未入力の項目があります。");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
@@ -84,7 +110,7 @@ public class ResistServlet extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Resist.jsp");
 					dispatcher.forward(request, response);
 					return;
-				}
+				}else {
 
 				UserBeans resist =new UserBeans(loginId,name,address, password);
 				// セッションスコープを取得
@@ -94,7 +120,8 @@ public class ResistServlet extends HttpServlet {
 
 				//userDao.resisterUser(loginId,name,address, password);
 				// サーブレットにリダイレクト
-				response.sendRedirect("UserUpdateConfirmServlet");
+				response.sendRedirect("ResistConfirmServlet");
+				}
 	}
 
 }

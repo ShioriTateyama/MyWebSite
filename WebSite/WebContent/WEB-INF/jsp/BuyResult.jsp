@@ -107,7 +107,8 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="row">
 <div class="col-6">
-<c:forEach var="buy" items="${buyList}" >
+<c:forEach var="buy" items="${buyDataList}" >
+
 <div class="container" style="margin-top: 30px">
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -121,15 +122,20 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <td>
 <div id="carouselExampleControls" class="carousel slide data-ride=" style="width: 8rem">
   <div class="carousel-inner">
+
+
+
     <div class="carousel-item active">
-      <img class="d-block w-100" src="img/${buy.fileName.get(0)}" alt="First slide">
+      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${buy.fileName.get(1)}" alt="Second slide">
+      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${buy.fileName.get(2)}" alt="Third slide">
+      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(2)}" alt="Third slide">
     </div>
+
+
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -145,65 +151,67 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-    <td> <pre></pre><pre></pre><pre></pre>${buy.itemName}<pre></pre>
-      <c:if test="${buy.categoryId != 4}">
-      ${buy.sizeName}</c:if><pre></pre>
-   ${buy.price}円</td>
+    <td> <pre></pre><pre></pre><pre></pre>${buy.itemDetailBeans.itemName}<pre></pre>
+      <c:if test="${buy.itemDetailBeans.categoryId != 4}">
+      ${buy.itemDetailBeans.sizeName}</c:if><pre></pre>
+   ${buy.itemDetailBeans.price}円</td>
 
 
  <td><pre></pre><pre></pre><pre></pre>数量：${buy.purchaseQuantity}<pre></pre>
- ${buy.price*buy.purchaseQuantity}円
+ ${buy.itemDetailBeans.price*buy.purchaseQuantity}円
  </td>
 
  </tr>
  </tbody>
- </table></div></div></div>
+ </table></div></div></div></c:forEach></div>
 
 
 
-</c:forEach></div>
+
+
 
 <div class="col">
+
  <div class="card" style="width: 40rem;margin-top:10px">
   <div class="card-body">
     <h2 class="card-title" style="margin-top:60px;margin-bottom:30px">注文内容</h2>
-    <p style="margin-top:60px;margin-bottom:30px">(${buy.purchaseQuantity}商品:合計${buy.allItemQuantity}点)</p>
+    <p style="margin-top:60px;margin-bottom:30px"></p>
     <div class="card-text">
 
-<c:if test="${buy.totalPrice >=10000}">
+<c:if test="${buyData.totalPrice >=10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buy.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyData.totalPrice}円</h5>
     <p></p>
     <h5 style="margin-top:60px;margin-bottom:30px">送料:0円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buy.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyData.totalPrice}円</h5>
 </c:if>
 
-<c:if test="${buy.totalPrice <10000}">
+<c:if test="${buyData.totalPrice <10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buy.totalPrice-500}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyData.totalPrice-500}円</h5>
     <p></p>
     <h5 style="margin-top:60px;margin-bottom:30px">送料:500円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buy.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyData.totalPrice}円</h5>
 </c:if>
-<hr>${buy.createDate}
+<hr>${buyData.formatDate}
 
 
-
+</div>
   </div>
 </div>
-</div>
+
 </div></div>
 
-
+<div class="col">
  <a href="IndexServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px ; margin-right:30px">買い物を続ける</button></a>
   <a href="UserDataServlet?${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px; margin-left:30px">ユーザー画面へ</button></a>
-
+</div>
 
 
 

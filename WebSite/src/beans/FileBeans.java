@@ -1,14 +1,20 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class FileBeans implements Serializable{
 
 
 	private int fileId;
 	private int itemDetailId;
-	private String fileName;
+	private List<String> fileNames;
 
+
+	public FileBeans(int itemDetailId,List<String> fileNames) {
+		this.itemDetailId = itemDetailId;
+		this.fileNames = fileNames;
+	}
 
 	public int getFileId() {
 		return fileId;
@@ -22,11 +28,11 @@ public class FileBeans implements Serializable{
 	public void setItemDetailId(int itemDetailId) {
 		this.itemDetailId = itemDetailId;
 	}
-	public String getFileName() {
-		return fileName;
+	public List<String> getFileName() {
+		return fileNames;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFileName( List<String>fileName) {
+		this.fileNames = fileName;
 	}
 
 }

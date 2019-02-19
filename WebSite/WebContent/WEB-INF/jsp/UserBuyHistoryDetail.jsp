@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>お気に入り</title>
+    <title>買い物カゴ</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -45,7 +45,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
           <a class="nav-link" href="IndexServlet">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
+       <li class="nav-item">
 
 
         <c:if test="${loginUser == null}" >
@@ -88,6 +88,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
+
 <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="word">
         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" value="search">Search</button>
@@ -95,83 +96,85 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-
   </nav>
 </header>
 
-<h3 class="text-center" style="margin-top: 80px">お気に入り商品</h3>
+<h3 class="text-center" style="margin-top: 100px;margin-bottom:30px">購入履歴詳細</h3>
+<div class="col-md-2 offset-md-10">
+  <a href="UserBuyHistoryServlet?userId=${loginUser.userId}" ><button type="button" class="btn btn-secondary" style="margin-top: 100px">購入履歴一覧へ戻る</button></a>
+
+   </div>
 
 
 
 
 
 
-<div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
- <c:if test="${errorMsg == null}" ><c:forEach var="favorite" items="${favoriteList}" >
-<div class="col s12 m3">
+<div class="container">
+ <table class="table table-bordered table-dark">
+  <thead>
+    <tr>
 
-<div class="card" style="width: 20rem">
+      <th scope="col">購入日時</th>
+      <th scope="col" >合計金額</th>
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="img/${favorite.fileName.get(0)}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="img/${favorite.fileName.get(1)}" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="img/${favorite.fileName.get(2)}" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>${selectBuyData.formatDate}</td>
+      <td>${selectBuyData.totalPrice}円</td>
+
+
+    </tr>
+
+  </tbody>
+
+</table>
 </div>
 
 
-  <div class="card-body"><form action="ItemDetailServlet" method="post">
-    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${favorite.itemDetailId}"> ${favorite.itemName}</a></p>
-    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${favorite.itemDetailId}">${favorite.price}円</a></p>
-    </form>
+
+<div class="container">
+<table class="table table-bordered" style="margin-top: 100px">
+  <thead>
+    <tr>
+      <th scope="col">商品名</th>
+      <th scope="col">単価</th>
+      <th scope="col">数量</th>
+
+    </tr>
+  </thead>
+  <c:forEach var="buyDetail" items="${buyDetailData}" >
+  <tbody>
+    <tr>
+
+      <td><a href="ItemDetailServlet?itemDetailId=${buyDetail.itemDetailId}">${buyDetail.itemDetailBeans.itemName}</a></td>
+      <td>${buyDetail.itemDetailBeans.price}</td>
+      <td>${buyDetail.purchaseQuantity}</td>
 
 
-    <c:if test="${loginUser !=null}">
-    <form action="FavoriteServlet" method="post"><input type="hidden" name="itemDetailId" value="${favorite.itemDetailId}"><input type="hidden" name="favoriteId" value="${favorite.favoriteId}"><input type="hidden" name="userId" value="${loginUser.userId}">
+    </tr>
 
-    <c:if test="${favorite.favoriteFlg == false}">
-    <button type="submit" value="addFavorite" class="far fa-star" style="color: black" onclick="{alert('お気に入りに追加しました')}"></button>
-    </c:if>
-    <c:if test="${favorite.favoriteFlg}">
-    <button type="submit" value="deleteFavorite" class="fas fa-star" style="color: black" onclick="{alert('お気に入りから削除しました')}"></button>
-    </c:if>
-    </form></c:if>
-
-
-  </div>
-  </div>
+  </tbody></c:forEach>
+</table>
 </div>
 
-</c:forEach></c:if></div>
-
-  <div class="row">
-  <div class="col-md-2 offset-md-5">
-
-  <c:if test="${errorMsg != null}" >
-	    <div class="p"><span style="color: #F00;">
-		  ${errorMsg}
-		</span></div>
-	</c:if>
 
 
 
-  <a href="UserDataServlet?userId=${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 60px">ユーザー情報へ戻る</button></a>
-   </div></div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -92,6 +92,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   </nav>
 </header>
 <h3 class="text-center" style="margin-top: 100px">ユーザー情報</h3>
+
+<div class="col-md-2 offset-md-10">
+  <a href="LogoutServlet"><button type="button" class="btn btn-dark btn-blocky" style="margin-top: 30px">ログアウト</button></a>
+
+   </div>
+
 <div class="container" style="margin-top: 60px">
  <table class="table table-bordered">
 
@@ -131,11 +137,14 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 <div class="row">
-  <div class="col-md-2 offset-md-5">
+  <div class="col">
 
 
-<a href="FavoriteServlet?userId=${loginUserInfo.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 80px">お気に入りした商品を見る</button></a>
+<a href="FavoriteServlet?userId=${loginUserInfo.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px">お気に入りした商品を見る</button></a>
+
   <a href="UserBuyHistoryServlet?userId=${loginUserInfo.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px">購入履歴を見る</button></a>
+
+
 
    </div></div>
 

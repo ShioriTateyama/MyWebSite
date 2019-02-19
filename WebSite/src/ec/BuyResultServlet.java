@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyBeans;
 import beans.BuyDetailBeans;
 import beans.ItemDetailBeans;
 import dao.BuyDAO;
@@ -51,8 +52,8 @@ public class BuyResultServlet extends HttpServlet {
 					response.sendRedirect("UserDataServlet");
 					return;
 				}
-				BuyDetailBeans buyData=(BuyDetailBeans) session.getAttribute("buyConfirm");
-				int totalPrice=buyData.getTotalPrice();
+				BuyDetailBeans buyDetailData=(BuyDetailBeans) session.getAttribute("buyConfirm");
+				int totalPrice=buyDetailData.getTotalPrice();
 
 				// URLからGETパラメータとしてIDを受け取る
 				String id = request.getParameter("userId");
@@ -74,8 +75,10 @@ public class BuyResultServlet extends HttpServlet {
 
 
 
-					List<BuyDetailBeans> buyDataList=buyDetailDao.selectBuyDetailData(buyId) ;
+					List<BuyDetailBeans> buyDataList=buyDetailDao.selectBuyDetailDatabyBuyId(buyId) ;
 					request.setAttribute("buyDataList", buyDataList);
+					BuyBeans buyData =buyDao.selectBuyData(buyId) ;
+					request.setAttribute("buyData", buyData);
 
 
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/BuyResult.jsp");

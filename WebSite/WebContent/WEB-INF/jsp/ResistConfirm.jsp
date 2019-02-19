@@ -101,30 +101,30 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <tbody>
     <tr>
       <th scope="row">名前</th>
-      <td>楯山詩織</td>
+      <td>${resist.name}</td>
 
     </tr>
     <tr>
       <th scope="row">ログインID</th>
-      <td>Jacob</td>
+      <td>${resist.loginId}</td>
 
     </tr>
     <tr>
       <th scope="row">住所</th>
-      <td >埼玉県春日部市豊町１−１８−４</td>
+      <td >${resist.address}</td>
 
     </tr>
      <tr>
       <th scope="row">パスワード</th>
-      <td >＊＊＊</td>
+      <td >${resist.password}</td>
 
     </tr>
   </tbody>
 </table>
 </div>
 <p  class="text-center" style= "margin-top: 40px">上記内容で登録してよろしいでしょうか?</p>
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px ; margin-right:30px">戻る</button>
-  <button type="button" class="btn btn-secondary" style="margin-top: 60px; margin-left:30px">登録</button>
+  <a href="ResistServlet"><button type="button" class="btn btn-secondary" style="margin-top: 60px ; margin-right:30px">戻る</button></a>
+  <a href="ResistResultServlet"> <button type="button" class="btn btn-secondary" style="margin-top: 60px; margin-left:30px">登録</button></a>
 
 
 

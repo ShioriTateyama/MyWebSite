@@ -52,11 +52,11 @@ public class FavoriteServlet extends HttpServlet {
 		// お気に入り一覧を取得
 				FavoriteDAO favoriteDao = new FavoriteDAO();
 				List<FavoriteBeans> favoriteList = favoriteDao.getAllFavoriteData(userId);
-				if(favoriteList == null){
+				if(favoriteList.isEmpty() ){
 					//インスタンスをリクエストスコープに保存
 					request.setAttribute("errorMsg", "お気に入りした商品はありません" );
 
-					// ログインjspにフォワード
+
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Favorite.jsp");
 					dispatcher.forward(request, response);
 					return;

@@ -56,7 +56,7 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		request.setAttribute("selectBuyData", selectBuyData);
 
 		BuyDetailDAO buyDetailDao =new BuyDetailDAO();
-		List<BuyDetailBeans> buyDetailData =buyDetailDao.selectBuyDetailData(buyId);
+		List<BuyDetailBeans> buyDetailData =buyDetailDao.selectBuyDetailDatabyBuyId(buyId);
 
 		//Requestスコープにインスタンスを保存
 		request.setAttribute("buyDetailData", buyDetailData);
