@@ -48,5 +48,41 @@ public class ResistConfirmServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+
+
+
+
+
+		HttpSession session =request.getSession();
+		UserBeans resist=(UserBeans) session.getAttribute("resist");
+		String loginId=resist.getLoginId();
+		String name=resist.getName();
+		String address=resist.getAddress();
+		String password=resist.getPassword();
+
+
+
+
+
+
+		UserDAO userDao =new UserDAO();
+
+
+
+			// セッションスコープを取得
+
+			userDao.resisterUser(loginId,name, address,password);
+
+
+
+			// userupdateresultのサーブレットにリダイレクト
+			response.sendRedirect("UserUpdateResult");
+
+
+
+
 	}
+
 }
