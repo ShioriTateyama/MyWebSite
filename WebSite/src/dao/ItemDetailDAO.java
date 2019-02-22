@@ -70,7 +70,10 @@ public class ItemDetailDAO {
 		return ItemDetailList;
 
     }
-
+/**
+ * bathrobe
+ * @return
+ */
 	public List<ItemDetailBeans> getBathrobeData() {
         Connection conn = null;
         List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
@@ -122,6 +125,62 @@ public class ItemDetailDAO {
 		return ItemDetailList;
 
     }
+	
+	
+	public List<ItemDetailBeans> getItemByCategoryAnd(int categoryId) {
+        Connection conn = null;
+        List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=?";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, categoryId);
+	        ResultSet rs = pStmt.executeQuery();
+
+
+			while (rs.next()) {
+
+
+
+				//①値を取得する
+					int itemDetailId = rs.getInt("item_detail_id");
+					String itemName = rs.getString("item_name");
+					int price = rs.getInt("price");
+					String detail = rs.getString("detail");
+
+					int stock = rs.getInt("stock");
+					int sizeId= rs.getInt("size_id");
+					int colorId=rs.getInt("color_id");
+
+					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
+							detail, stock,sizeId,colorId);
+					ItemDetailList.add(item);
+
+			}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+		return ItemDetailList;
+
+    }
+
 
 
 /**
