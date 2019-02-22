@@ -102,22 +102,6 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-      <div class="btn-group" style= "margin-top: 100px">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   サイズ
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">ミトン</a>
-    <a class="dropdown-item" href="#">ウォッシュタオル</a>
-    <a class="dropdown-item" href="#">ハンドタオル</a>
-    <a class="dropdown-item" href="#">フェイスタオル</a>
-    <a class="dropdown-item" href="#">子供用バスタオル</a>
-    <a class="dropdown-item" href="#">バスタオル</a>
-    <a class="dropdown-item" href="#">ビッグバスタオル</a>
-
-
-  </div>
-</div>
 
 <div class="btn-group" style= "margin-top: 100px">
 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -155,9 +139,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
 <c:forEach var="item" items="${itemDataList}" >
-<div class="col s12 m3">
+<div class="col-3">
+<div class="contar">
+<div class="card" style="height: 36rem;margin-top: 10px">
 
-<div class="card" style="width: 20rem">
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -202,7 +187,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   </div>
   </div>
-</div>
+</div></div>
 
 </c:forEach></div>
 

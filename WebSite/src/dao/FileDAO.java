@@ -74,9 +74,15 @@ public class FileDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "select file.* from file INNER JOIN item_detail ON file.item_detail_id= item_detail.item_detail_id"+
-            			"inner join item on item.item_id= item_detail.item_id"+
-            			"where item_detail_id=? and size_id= 20";
+            String sql = "select t3.* " +
+            		"	from item_detail t1 " +
+            		"		inner join item_detail t2 " +
+            		"			on t2.item_id = t1.item_id " +
+            		"			and t2.color_id = t1.color_id " +
+            		"			and t2.size_id = 20 " +
+            		"		inner join file t3 " +
+            		"			on t3.item_detail_id = t2.item_detail_id " +
+            		"	where t1.item_detail_id = ? ";
 
 
 

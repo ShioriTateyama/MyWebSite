@@ -10,8 +10,18 @@ public class ItemBeans implements Serializable{
 	private int categoryId;
 	private String detail;
 
+	public ItemBeans() {
+
+	}
 
 
+	public ItemBeans(int itemId, String itemName, int price, int categoryId, String detail) {
+		this.itemId = itemId;
+		this.itemName = itemName;
+		this.price = price;
+		this.categoryId = categoryId;
+		this.detail = detail;
+	}
 
 	public int getItemId() {
 		return itemId;

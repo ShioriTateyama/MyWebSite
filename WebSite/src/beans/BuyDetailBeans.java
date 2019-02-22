@@ -3,8 +3,10 @@ package beans;
 import java.io.Serializable;
 
 import dao.BuyDAO;
+import dao.ColorDAO;
 import dao.FileDAO;
 import dao.ItemDetailDAO;
+import dao.SizeDAO;
 
 
 public class BuyDetailBeans implements Serializable{
@@ -17,10 +19,15 @@ public class BuyDetailBeans implements Serializable{
 	private int itemQuantity;
 	private int allItemQuantity;
 	private int userId;
+	private int categoryId;
+	private int colorId;
+
+
 
 	private ItemDetailBeans itemDetailBeans;
 	private BuyBeans buyBeans;
 	private FileBeans fileBeans;
+	private ColorBeans colorBeans;
 
 
 	public BuyDetailBeans(int buyDetailId, int buyId, int itemDetailId, int purchaseQuantity) {
@@ -109,8 +116,29 @@ public class BuyDetailBeans implements Serializable{
 		BuyDAO buyDao =new BuyDAO();
 		return buyDao.selectBuyData(this.buyId);
 	}
+
 	public FileBeans getFileBeans() {
 		FileDAO fileDao =new FileDAO();
-		return fileDao.getFile(this.itemDetailId);
+
+		if(this.getItemDetailBeans().getItemBeans().getCategoryId()!=3) {
+
+			return fileDao.getFile(this.itemDetailId);
+		}else {
+
+			return fileDao.getBathrobeFile(this.itemDetailId);
+
+		}
+
 	}
+
+	public ColorBeans getColorBeans() {
+		ColorDAO colorDao =new ColorDAO();
+		return colorDao.selectColorNamebyColorId(this.getItemDetailBeans().getColorId());
+	}
+	public SizeBeans getSizeBeans() {
+		SizeDAO sizeDao =new SizeDAO();
+		return sizeDao.selectSizeNamebySizeId(this.getItemDetailBeans().getSizeId());
+	}
+
+
 }

@@ -107,10 +107,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 <div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
- <c:if test="${errorMsg == null}" ><c:forEach var="favorite" items="${favoriteList}" >
-<div class="col s12 m3">
+ <c:if test="${errorMsg == null}" >
+ <c:forEach var="favorite" items="${favoriteList}" >
 
-<div class="card" style="width: 20rem">
+<div class="col-3">
+<div class="contar">
+<div class="card" style="height: 36rem">
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -155,6 +157,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   </div>
   </div>
+</div>
 </div>
 
 </c:forEach></c:if></div>

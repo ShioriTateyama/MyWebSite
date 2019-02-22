@@ -45,7 +45,7 @@ public class ItemServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				UserBeans ub =(UserBeans)session.getAttribute("loginUser");
 				// 確認用：idをコンソールに出力
-				System.out.println(ub.getUserId());
+
 				ItemDetailDAO itemDetailDao =new ItemDetailDAO();
 
 		if(categoryId==3) {

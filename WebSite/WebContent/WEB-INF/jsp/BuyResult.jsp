@@ -153,7 +153,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
     <td> <pre></pre><pre></pre><pre></pre>${buy.itemDetailBeans.itemName}<pre></pre>
       <c:if test="${buy.itemDetailBeans.categoryId != 4}">
-      ${buy.itemDetailBeans.sizeName}</c:if><pre></pre>
+      ${buy.sizeBeans.sizeName}</c:if><pre></pre>
    ${buy.itemDetailBeans.price}円</td>
 
 

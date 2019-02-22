@@ -88,9 +88,6 @@ public class ItemDetailDAO {
 
 
 			while (rs.next()) {
-
-
-
 				//①値を取得する
 					int itemDetailId = rs.getInt("item_detail_id");
 					String itemName = rs.getString("item_name");
@@ -310,6 +307,8 @@ public class ItemDetailDAO {
 
 				//①値を取得する
 
+					int itemId=rs.getInt("item_id");
+
 					String itemName = rs.getString("item_name");
 					int price = rs.getInt("price");
 					String detail = rs.getString("detail");
@@ -319,7 +318,8 @@ public class ItemDetailDAO {
 					int colorId=rs.getInt("color_id");
 
 
-					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
+
+					ItemDetailBeans item = new ItemDetailBeans(true, itemId, itemDetailId, itemName, price, categoryId,
 							detail, stock,sizeId,colorId);
 						return item;
 

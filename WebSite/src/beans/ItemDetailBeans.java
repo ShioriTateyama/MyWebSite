@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.FavoriteDAO;
 import dao.FileDAO;
+import dao.ItemDAO;
 import dao.SizeDAO;
 
 
@@ -19,6 +20,7 @@ public class ItemDetailBeans implements Serializable{
 	private Date createDate;
 	private Date updateDate;
 
+	private ItemBeans itemBeans;
 	private FileBeans fileBeans;
 	private SizeBeans sizeBeans;
 	private FavoriteBeans favoriteBeans;
@@ -54,6 +56,20 @@ public class ItemDetailBeans implements Serializable{
 
 	public ItemDetailBeans(int itemDetailId, String itemName, int price, int categoryId, String detail,
 			int stock,  int sizeId, int colorId) {
+		this.itemDetailId=itemDetailId;
+		this.itemName=itemName;
+		this.price=price;
+		this.categoryId=categoryId;
+		this.detail=detail;
+		this.stock=stock;
+		this.sizeId=sizeId;
+		this.colorId=colorId;
+
+	}
+
+	public ItemDetailBeans(boolean f, int itemId, int itemDetailId, String itemName, int price, int categoryId, String detail,
+			int stock,  int sizeId, int colorId) {
+		this.itemId = itemId;
 		this.itemDetailId=itemDetailId;
 		this.itemName=itemName;
 		this.price=price;
@@ -260,9 +276,22 @@ public class ItemDetailBeans implements Serializable{
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public ItemBeans getItemBeans() {
+		ItemDAO dao =new ItemDAO();
+		return dao.getItem(this.itemId);
+	}
 	public FileBeans getFileBeans() {
 		FileDAO fileDao =new FileDAO();
-		return fileDao.getFile(this.itemDetailId);
+
+		if(this.categoryId!=3) {
+
+			return fileDao.getFile(this.itemDetailId);
+		}else {
+
+			return fileDao.getBathrobeFile(this.itemDetailId);
+
+		}
 	}
 	public SizeBeans getSizeBeans() {
 		SizeDAO sizeDao =new SizeDAO();

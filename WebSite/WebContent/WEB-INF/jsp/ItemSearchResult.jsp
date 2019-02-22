@@ -94,47 +94,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-      <div class="btn-group" style= "margin-top: 50px">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   サイズ
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">ミトン</a>
-    <a class="dropdown-item" href="#">ウォッシュタオル</a>
-    <a class="dropdown-item" href="#">ハンドタオル</a>
-    <a class="dropdown-item" href="#">フェイスタオル</a>
-    <a class="dropdown-item" href="#">子供用バスタオル</a>
-    <a class="dropdown-item" href="#">バスタオル</a>
-    <a class="dropdown-item" href="#">ビッグバスタオル</a>
 
-
-  </div>
-</div>
-
-<div class="btn-group" style= "margin-top: 50px">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    カラー
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">イエロー</a>
-    <a class="dropdown-item" href="#">ブルー</a>
-    <a class="dropdown-item" href="#">ホワイト</a>
-    <a class="dropdown-item" href="#">グレー</a>
-     <a class="dropdown-item" href="#">モーブ</a>
-      <a class="dropdown-item" href="#">ブラウン</a>
-       <a class="dropdown-item" href="#">パープル</a>
-        <a class="dropdown-item" href="#">オレンジ色</a>
-         <a class="dropdown-item" href="#">ピンク</a>
-          <a class="dropdown-item" href="#">グリーン</a>
-           <a class="dropdown-item" href="#">ナチュラル</a>
-  </div>
-</div>
-<div class="btn-group" style= "margin-top: 50px; margin-left:10px">
-<span class="align-baseline">価格：</span><a href="#">高い順</a><span class="align-baseline">｜</span><a href="#">安い順</a>
-</div>
-<div class="btn-group" style= "margin-top: 50px;margin-left:10px">
-<button type="button" class="btn btn-outline-secondary">消去</button>
-</div>
 
 <div class="btn-group" style= "margin-top: 50px;margin-left:40px">
 <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
@@ -144,11 +104,12 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
+
 <div class="row" style= "margin-top: 100px;margin-left:40px;margin-right:40px">
 <c:forEach var="search" items="${searchResultList}" >
-<div class="col s12 m3">
+<div class="col-3">
 
-<div class="card" style="width: 20rem">
+<div class="card" style="height: 36rem;margin-top: 10px">
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -201,6 +162,11 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   <div class="row">
   <div class="col-md-2 offset-md-5">
+  <c:if test="${error != null}" >
+	    <div class="p"><span style="color: #F00">
+		  ${error}
+		</span></div>
+	</c:if>
 
 
 

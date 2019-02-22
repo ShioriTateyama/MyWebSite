@@ -48,6 +48,12 @@ public class ItemSearchResult extends HttpServlet {
 		//スコープにインスタンスを保存
 		session.setAttribute("searchResultList", searchResultList);
 
+		if(searchResultList.isEmpty()) {
+
+			request.setAttribute("error", "検索結果は０件でした" );
+		}
+
+
 
 
 

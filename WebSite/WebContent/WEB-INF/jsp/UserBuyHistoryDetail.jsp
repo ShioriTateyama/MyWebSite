@@ -134,7 +134,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 
-
+ <form action="ItemDetailServlet" method="post" class="form-inline mt-2 mt-md-0">
 <div class="container">
 <table class="table table-bordered" style="margin-top: 100px">
   <thead>
@@ -145,11 +145,18 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
     </tr>
   </thead>
+
   <c:forEach var="buyDetail" items="${buyDetailData}" >
   <tbody>
     <tr>
 
-      <td><a href="ItemDetailServlet?itemDetailId=${buyDetail.itemDetailId}">${buyDetail.itemDetailBeans.itemName}</a></td>
+      <td><a href="ItemDetailServlet?itemDetailId=${buyDetail.itemDetailId}">
+      <input type="hidden" name="categoryId" value="${buyDetail.itemDetailBeans.categoryId}">${buyDetail.itemDetailBeans.itemName}</a>
+      <c:if test="${buyDetail.itemDetailBeans.categoryId != 4}">
+      ・${buyDetail.sizeBeans.sizeName}
+      ・${buyDetail.colorBeans.colorName}</c:if>
+
+      </td>
       <td>${buyDetail.itemDetailBeans.price}</td>
       <td>${buyDetail.purchaseQuantity}</td>
 
@@ -160,7 +167,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </table>
 </div>
 
-
+</form>
 
 
 
