@@ -3,6 +3,7 @@ package beans;
 import java.io.Serializable;
 
 import dao.BuyDAO;
+import dao.FileDAO;
 import dao.ItemDetailDAO;
 
 
@@ -19,6 +20,7 @@ public class BuyDetailBeans implements Serializable{
 
 	private ItemDetailBeans itemDetailBeans;
 	private BuyBeans buyBeans;
+	private FileBeans fileBeans;
 
 
 	public BuyDetailBeans(int buyDetailId, int buyId, int itemDetailId, int purchaseQuantity) {
@@ -107,5 +109,8 @@ public class BuyDetailBeans implements Serializable{
 		BuyDAO buyDao =new BuyDAO();
 		return buyDao.selectBuyData(this.buyId);
 	}
-
+	public FileBeans getFileBeans() {
+		FileDAO fileDao =new FileDAO();
+		return fileDao.getFile(this.itemDetailId);
+	}
 }

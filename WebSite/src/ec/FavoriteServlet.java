@@ -52,6 +52,10 @@ public class FavoriteServlet extends HttpServlet {
 		// お気に入り一覧を取得
 				FavoriteDAO favoriteDao = new FavoriteDAO();
 				List<FavoriteBeans> favoriteList = favoriteDao.getAllFavoriteData(userId);
+
+
+
+
 				if(favoriteList.isEmpty() ){
 					//インスタンスをリクエストスコープに保存
 					request.setAttribute("errorMsg", "お気に入りした商品はありません" );
@@ -61,6 +65,14 @@ public class FavoriteServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 					return;
 				}
+				for (FavoriteBeans favoriteBeans : favoriteList) {
+					favoriteBeans.setFavoriteFlg(true);
+				}
+
+
+
+
+
 				// リクエストスコープにお気に入り商品情報をセット
 				request.setAttribute("favoriteList", favoriteList);
 

@@ -4,39 +4,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import base.DBManager;
-import beans.ColorBeans;
 import beans.SizeBeans;
 
 public class SizeDAO {
 
-	public List<SizeBeans> selectSizeData() {
+	public SizeBeans selectSizeData(int itemDetailId) {
         Connection conn = null;
-        List<SizeBeans> sizeList=new ArrayList<SizeBeans>();
+
         try {
             // データベースへ接続
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "SELECT * FROM size;";
+            String sql = "SELECT * FROM size inner join item_detail on size.size_id = item_detail.size_id  where item_detail_id =? ;";
 
-             // SELECTを実行し、結果表を取得
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, itemDetailId);
+            ResultSet rs = pStmt.executeQuery();
 
 
 
             while (rs.next()) {
-            	int sizeIdData = rs.getInt("size_id");
+            	int sizeId = rs.getInt("size_id");
                 String sizeName= rs.getString("size_name");
 
-                SizeBeans size = new  SizeBeans(sizeIdData, sizeName);
+                SizeBeans size = new  SizeBeans(sizeId, sizeName);
+        		return size;
 
-                sizeList.add(size);
             }
 
         } catch (SQLException e) {
@@ -54,7 +51,8 @@ public class SizeDAO {
                 }
             }
         }
-		return sizeList;
+		return null;
+
 
     }
 }

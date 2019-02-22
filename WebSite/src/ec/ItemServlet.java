@@ -9,8 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import beans.FavoriteBeans;
 import beans.ItemDetailBeans;
+import beans.UserBeans;
+import dao.FavoriteDAO;
 import dao.ItemDetailDAO;
 
 /**
@@ -37,16 +41,68 @@ public class ItemServlet extends HttpServlet {
 				int categoryId=Integer.parseInt(id);
 				// 確認用：idをコンソールに出力
 				System.out.println(categoryId);
-
+				// セッションスコープを取得
+				HttpSession session = request.getSession();
+				UserBeans ub =(UserBeans)session.getAttribute("loginUser");
+				// 確認用：idをコンソールに出力
+				System.out.println(ub.getUserId());
 				ItemDetailDAO itemDetailDao =new ItemDetailDAO();
 
-				List<ItemDetailBeans> itemDataList =itemDetailDao.getItemByCategory(categoryId) ;
+		if(categoryId==3) {
+
+
+					List<ItemDetailBeans> bathrobeList= itemDetailDao.getBathrobeData();
+
+					if(session.getAttribute("loginUser")!= null ) {
+
+
+						FavoriteDAO favoriteDAO = new FavoriteDAO();
+						List<FavoriteBeans>  favoriteList = favoriteDAO.getAllFavoriteData(ub.getUserId());
+
+							for (FavoriteBeans favoriteBeans : favoriteList) {
+									for (ItemDetailBeans itemData : bathrobeList) {
+										if(favoriteBeans.getItemDetailId() == itemData.getItemDetailId()) {
+											itemData.setFavoriteFlg(true);
+										}
+
+									}
+
+							}
+					}
+							//Requestスコープにインスタンスを保存
+							request.setAttribute("itemDataList",bathrobeList);
+
+
+		}if(categoryId!=3){
+
+			List<ItemDetailBeans> itemDataList =itemDetailDao.getItemByCategory(categoryId) ;
+
+				if(session.getAttribute("loginUser")!= null ) {
+
+					FavoriteDAO favoriteDAO = new FavoriteDAO();
+					List<FavoriteBeans>  favoriteList = favoriteDAO.getAllFavoriteData(ub.getUserId());
+
+						for (FavoriteBeans favoriteBeans : favoriteList) {
+								for (ItemDetailBeans itemData : itemDataList) {
+									if(favoriteBeans.getItemDetailId() == itemData.getItemDetailId()) {
+										itemData.setFavoriteFlg(true);
+									}
+								}
+						}
+				}
+
+
 
 				//Requestスコープにインスタンスを保存
 				request.setAttribute("itemDataList", itemDataList);
 
+		}
+
+
 				RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/jsp/Item.jsp");
 				dispatcher.forward(request, response);
+
+
 
 	}
 

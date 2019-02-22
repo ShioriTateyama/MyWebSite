@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import dao.FavoriteDAO;
 import dao.FileDAO;
+import dao.SizeDAO;
 
 
 public class ItemDetailBeans implements Serializable{
@@ -18,6 +20,9 @@ public class ItemDetailBeans implements Serializable{
 	private Date updateDate;
 
 	private FileBeans fileBeans;
+	private SizeBeans sizeBeans;
+	private FavoriteBeans favoriteBeans;
+
 
 	private int userId;
 
@@ -258,6 +263,14 @@ public class ItemDetailBeans implements Serializable{
 	public FileBeans getFileBeans() {
 		FileDAO fileDao =new FileDAO();
 		return fileDao.getFile(this.itemDetailId);
+	}
+	public SizeBeans getSizeBeans() {
+		SizeDAO sizeDao =new SizeDAO();
+		return sizeDao.selectSizeData(this.itemDetailId);
+	}
+	public List<FavoriteBeans> getFavoriteBeans() {
+		FavoriteDAO favoriteDao =new FavoriteDAO();
+		return favoriteDao.getAllFavoriteData(this.userId);
 	}
 
 }

@@ -54,7 +54,7 @@ public class FavoriteDAO {
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "SELECT favorite_id FROM favorite WHERE user_id = ? AND item_detail_id=?";
+            String sql = "SELECT favorite_id FROM favorite WHERE user_id = ? AND item_detail_id = ?";
 
              // SELECTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -130,12 +130,7 @@ public class FavoriteDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql ="SELECT * FROM item_detail "+
-                    "INNER JOIN item ON item_detail.item_id = item.item_id "+
-                    "INNER JOIN file ON item_detail.item_detail_id =file.item_detail_id "+
-                    "INNER JOIN size ON size.size_id=item_detail.size_id "+
-                    "LEFT OUTER JOIN favorite ON item_detail.item_detail_id = favorite.item_detail_id "+
-                    "WHERE user_id =? ORDER BY file.item_detail_id DESC";
+            String sql ="SELECT * FROM favorite where user_id = ? ";
 
 
             PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -143,51 +138,22 @@ public class FavoriteDAO {
 
 	        ResultSet rs = pStmt.executeQuery();
 
-	      //item_detail_idは絶対に１からはじまるので、item_detail_idが正の時にインスタンスをつくるため
-	        int itemDetailId =-1;
-            String itemName= "";
-            int price = 0;
-            int categoryIdData=0;
-            String detail ="";
-            String sizeName="";
-            int stock=0;
-            List<String> fileNames=null;
-            boolean favoriteFlg = false;
 
 
-			while (rs.next()) {
+
+            while (rs.next()) {
 
 
-				//②item_detail_idが次の数に切り替わったら、インスタンスを作成する
-				if (itemDetailId != rs.getInt("item_detail_id")) {
-					if (itemDetailId >= 0) {
-						//item_detail_idごとにインスタンス作成
-						FavoriteBeans item = new FavoriteBeans(itemDetailId, itemName, price, categoryIdData,
-								detail, stock,sizeName,fileNames, favoriteFlg);
-						favoriteList.add(item);
 
-						favoriteFlg = false;
-					}
 				//①値を取得する
-					itemDetailId = rs.getInt("item_detail_id");
-					itemName = rs.getString("item_name");
-					price = rs.getInt("price");
-					categoryIdData = rs.getInt("category_id");
-					detail = rs.getString("detail");
-					sizeName = rs.getString("size_name");
-					stock = rs.getInt("stock");
-
-					if(rs.getInt("favorite_id") != 0) {
-						favoriteFlg = true;
-					}
+					int itemDetailId = rs.getInt("item_detail_id");
+					int favoriteId = rs.getInt("favorite_id");
 
 
-					fileNames = new ArrayList<>();
-				}
-				fileNames.add(rs.getString("file_name"));
+					FavoriteBeans item = new FavoriteBeans(favoriteId,userId,itemDetailId);
+					favoriteList.add(item);
+
 			}
-
-
         } catch (SQLException e) {
             e.printStackTrace();
 

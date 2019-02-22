@@ -26,7 +26,8 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文
-            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=? ";
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=?";
+
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1, categoryId);
 	        ResultSet rs = pStmt.executeQuery();
@@ -69,6 +70,63 @@ public class ItemDetailDAO {
 		return ItemDetailList;
 
     }
+
+	public List<ItemDetailBeans> getBathrobeData() {
+        Connection conn = null;
+        List<ItemDetailBeans> ItemDetailList = new ArrayList<ItemDetailBeans>();
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=3 and size_id=20";
+
+            Statement stmt = conn.createStatement();
+
+	        ResultSet rs = stmt.executeQuery(sql);
+
+
+			while (rs.next()) {
+
+
+
+				//①値を取得する
+					int itemDetailId = rs.getInt("item_detail_id");
+					String itemName = rs.getString("item_name");
+					int price = rs.getInt("price");
+					int categoryId = rs.getInt("category_id");
+					String detail = rs.getString("detail");
+
+					int stock = rs.getInt("stock");
+					int sizeId= rs.getInt("size_id");
+					int colorId=rs.getInt("color_id");
+
+					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
+							detail, stock,sizeId,colorId);
+					ItemDetailList.add(item);
+
+			}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+		return ItemDetailList;
+
+    }
+
+
 /**
  * カラーで
  * @param colorId
@@ -240,7 +298,7 @@ public class ItemDetailDAO {
             conn = DBManager.getConnection();
 
             // SELECT文を準備
-            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where category_id=? ";
+            String sql = "select * from item_detail inner join item ON item_detail.item_id=item.item_id where item_detail_id=? ";
             PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setInt(1,itemDetailId);
 	        ResultSet rs = pStmt.executeQuery();
@@ -263,8 +321,8 @@ public class ItemDetailDAO {
 
 					ItemDetailBeans item = new ItemDetailBeans(itemDetailId, itemName, price, categoryId,
 							detail, stock,sizeId,colorId);
+						return item;
 
-					return item;
 			}
 
         } catch (SQLException e) {
@@ -281,7 +339,7 @@ public class ItemDetailDAO {
                 }
             }
         }
-		return null;
+		return  null;
 
 
 

@@ -126,13 +126,13 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
     <div class="carousel-item active">
-      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(0)}" alt="First slide">
+      <img class="d-block w-100" src="img/${buy.fileBeans.fileName.get(0)}" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(1)}" alt="Second slide">
+      <img class="d-block w-100" src="img/${buy.fileBeans.fileName.get(1)}" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="img/${buy.itemDetailBeans.fileName.get(2)}" alt="Third slide">
+      <img class="d-block w-100" src="img/${buy.fileBeans.fileName.get(2)}" alt="Third slide">
     </div>
 
 
@@ -210,7 +210,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 <div class="col">
  <a href="IndexServlet"><button type="button" class="btn btn-secondary" style="margin-top: 30px ; margin-right:30px">買い物を続ける</button></a>
-  <a href="UserDataServlet?${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px; margin-left:30px">ユーザー画面へ</button></a>
+  <a href="UserDataServlet?userId=${loginUser.userId}"><button type="button" class="btn btn-secondary" style="margin-top: 30px; margin-left:30px">ユーザー画面へ</button></a>
 </div>
 
 
