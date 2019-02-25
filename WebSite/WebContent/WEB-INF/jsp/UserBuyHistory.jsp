@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -122,7 +125,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <tr>
       <th scope="row"><a href="UserBuyHistoryDetailServlet?buyId=${buy.buyId}" class="btn-floating btn waves-effect waves-light "><i class="far fa-hand-point-right"></i></a></th>
       <td>${buy.formatDate}</td>
-      <td>${buy.totalPrice}円</td>
+      <td><fmt:formatNumber value="${buy.totalPrice}" pattern="###,###" />円</td>
 
 
     </tr>

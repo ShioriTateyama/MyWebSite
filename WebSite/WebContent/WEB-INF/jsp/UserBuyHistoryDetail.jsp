@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -100,17 +103,11 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </header>
 
 <h3 class="text-center" style="margin-top: 100px;margin-bottom:30px">購入履歴詳細</h3>
-<div class="col-md-2 offset-md-10">
-  <a href="UserBuyHistoryServlet?userId=${loginUser.userId}" ><button type="button" class="btn btn-secondary" style="margin-top: 100px">購入履歴一覧へ戻る</button></a>
-
-   </div>
 
 
 
 
-
-
-<div class="container">
+<div class="container" style="margin-top: 100px">
  <table class="table table-bordered table-dark">
   <thead>
     <tr>
@@ -123,7 +120,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <tbody>
     <tr>
       <td>${selectBuyData.formatDate}</td>
-      <td>${selectBuyData.totalPrice}円</td>
+      <td><fmt:formatNumber value="${selectBuyData.totalPrice}" pattern="###,###" />円</td>
 
 
     </tr>
@@ -136,7 +133,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
  <form action="ItemDetailServlet" method="post" class="form-inline mt-2 mt-md-0">
 <div class="container">
-<table class="table table-bordered" style="margin-top: 100px">
+<table class="table table-bordered" style="margin-top: 50px">
   <thead>
     <tr>
       <th scope="col">商品名</th>
@@ -157,7 +154,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       ・${buyDetail.colorBeans.colorName}</c:if>
 
       </td>
-      <td>${buyDetail.itemDetailBeans.price}</td>
+      <td><fmt:formatNumber value="${buyDetail.itemDetailBeans.price}" pattern="###,###" />円</td>
       <td>${buyDetail.purchaseQuantity}</td>
 
 
@@ -168,7 +165,9 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 </form>
-
+<div class="text-center">
+ <a href="UserBuyHistoryServlet?userId=${loginUser.userId}" ><button type="button" class="btn btn-secondary" style="margin-top: 50px">購入履歴一覧へ戻る</button></a>
+</div>
 
 
 

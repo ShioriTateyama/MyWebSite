@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -136,7 +139,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
   <div class="card-body"><form action="ItemDetailServlet" method="post">
     <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${search.itemDetailId}"> ${search.itemName}</a></p>
-    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${search.itemDetailId}">${search.price}円</a></p>
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${search.itemDetailId}"><fmt:formatNumber value="${search.price}" pattern="###,###" />円</a></p>
     </form>
 
 

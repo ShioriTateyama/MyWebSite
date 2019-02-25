@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -154,11 +157,11 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <td> <pre></pre><pre></pre><pre></pre>${buy.itemDetailBeans.itemName}<pre></pre>
       <c:if test="${buy.itemDetailBeans.categoryId != 4}">
       ${buy.sizeBeans.sizeName}</c:if><pre></pre>
-   ${buy.itemDetailBeans.price}円</td>
+   <fmt:formatNumber value="${buy.itemDetailBeans.price}" pattern="###,###" />円</td>
 
 
- <td><pre></pre><pre></pre><pre></pre>数量：${buy.purchaseQuantity}<pre></pre>
- ${buy.itemDetailBeans.price*buy.purchaseQuantity}円
+ <td><pre></pre><pre></pre><pre></pre>数量<p>${buy.purchaseQuantity}</p><pre></pre>
+ <fmt:formatNumber value="${buy.itemDetailBeans.price*buy.purchaseQuantity}" pattern="###,###" />円
  </td>
 
  </tr>
@@ -181,23 +184,23 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <c:if test="${buyData.totalPrice >=10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyData.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:<fmt:formatNumber value="${buyData.totalPrice}" pattern="###,###" />円</h5>
     <p></p>
     <h5 style="margin-top:60px;margin-bottom:30px">送料:0円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyData.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:<fmt:formatNumber value="${buyData.totalPrice}" pattern="###,###" />円</h5>
 </c:if>
 
 <c:if test="${buyData.totalPrice <10000}">
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:${buyData.totalPrice-500}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">商品合計:<fmt:formatNumber value="${buyData.totalPrice-500}" pattern="###,###" />円</h5>
     <p></p>
     <h5 style="margin-top:60px;margin-bottom:30px">送料:500円</h5>
     <p></p>
     <hr>
-    <h5 style="margin-top:60px;margin-bottom:30px">合計:${buyData.totalPrice}円</h5>
+    <h5 style="margin-top:60px;margin-bottom:30px">合計:<fmt:formatNumber value="${buyData.totalPrice}" pattern="###,###" />円</h5>
 </c:if>
 <hr>${buyData.formatDate}
 

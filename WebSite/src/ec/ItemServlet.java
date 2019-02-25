@@ -41,6 +41,7 @@ public class ItemServlet extends HttpServlet {
 				int categoryId=Integer.parseInt(id);
 				// 確認用：idをコンソールに出力
 				System.out.println(categoryId);
+				request.setAttribute("categoryId",categoryId);
 				// セッションスコープを取得
 				HttpSession session = request.getSession();
 				UserBeans ub =(UserBeans)session.getAttribute("loginUser");

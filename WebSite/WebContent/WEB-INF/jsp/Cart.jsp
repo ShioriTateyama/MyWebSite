@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -154,7 +157,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       <td> <pre></pre><pre></pre><pre></pre>${item.itemName}<pre></pre>
       <c:if test="${item.categoryId != 4}">
       ${item.sizeName}</c:if><pre></pre>
-   ${item.price}円</td>
+   <fmt:formatNumber value="${item.price}" pattern="###,###" />円</td>
 
    <td>
    <input type="hidden" value="${loginUser.userId}" name="userId">

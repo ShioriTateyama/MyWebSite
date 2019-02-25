@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -102,31 +103,74 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
 
 
-
 <div class="btn-group" style= "margin-top: 100px">
+
+<form action="ItemByColorServlet" method="post">
+
 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     カラー
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">イエロー</a>
-    <a class="dropdown-item" href="#">ブルー</a>
-    <a class="dropdown-item" href="#">ホワイト</a>
-    <a class="dropdown-item" href="#">グレー</a>
-     <a class="dropdown-item" href="#">モーブ</a>
-      <a class="dropdown-item" href="#">ブラウン</a>
-       <a class="dropdown-item" href="#">パープル</a>
-        <a class="dropdown-item" href="#">オレンジ色</a>
-         <a class="dropdown-item" href="#">ピンク</a>
-          <a class="dropdown-item" href="#">グリーン</a>
-           <a class="dropdown-item" href="#">ナチュラル</a>
-  </div>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<c:if test="${categoryId==1}">
+
+    <button type="submit" class="dropdown-item"  name="colorId" value="1">イエロー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="2">ブルー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="3">ホワイト</button>
+    <button type="submit" class="dropdown-item" name="colorId" value="4">グレー</button>
+     <button type="submit" class="dropdown-item"name="colorId" value="6">ブラウン</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="7">パープル</button>
+      <button type="submit" class="dropdown-item" name="colorId" value="9">ピンク</button>
+         <button type="submit" class="dropdown-item"  name="colorId" value="11">ナチュラル</button>
+         </c:if>
+
+  <c:if test="${categoryId==2}">
+
+   <button type="submit" class="dropdown-item"  name="colorId" value="1">イエロー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="2">ブルー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="3">ホワイト</button>
+    <button type="submit" class="dropdown-item" name="colorId" value="4">グレー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="5">モーブ</button>
+     <button type="submit" class="dropdown-item"name="colorId" value="6">ブラウン</button>
+      <button type="submit" class="dropdown-item" name="colorId" value="9">ピンク</button>
+         <button type="submit" class="dropdown-item" name="colorId" value="10">グリーン</button>
+         <button type="submit" class="dropdown-item"  name="colorId" value="11">ナチュラル</button>
+         </c:if>
+
+         <c:if test="${categoryId==3}">
+
+     <button type="submit" class="dropdown-item" name="colorId" value="3">ホワイト</button>
+    <button type="submit" class="dropdown-item" name="colorId" value="4">グレー</button>
+     <button type="submit" class="dropdown-item" name="colorId" value="5">モーブ</button>
+     <button type="submit" class="dropdown-item"name="colorId" value="6">ブラウン</button>
+      <button type="submit" class="dropdown-item" name="colorId" value="9">ピンク</button>
+         <button type="submit" class="dropdown-item" name="colorId" value="10">グリーン</button>
+         <button type="submit" class="dropdown-item"  name="colorId" value="11">ナチュラル</button>
+
+         </c:if>
+
+          <c:if test="${categoryId==4}">
+
+     <button type="submit" class="dropdown-item" name="colorId" value="3">ホワイト</button>
+         <button type="submit" class="dropdown-item"  name="colorId" value="11">ナチュラル</button>
+          <button type="submit" class="dropdown-item"  name="colorId" value="12">ブラック</button>
+
+         </c:if>
+
+
+</div>
+	<input type="hidden"  name="categoryId" value="${categoryId}">
+
+ </form>
+
 </div>
 <div class="btn-group" style= "margin-top: 100px; margin-left:10px">
-<span class="align-baseline">価格：</span><a href="#">高い順</a><span class="align-baseline">｜</span><a href="#">安い順</a>
+
+<span class="align-baseline">価格：</span>
+<a href="ItemPriceOrderServlet?categoryId=${categoryId}">高い順</a>
+<span class="align-baseline">｜</span>
+<a href="ItemServlet?categoryId=${categoryId}">安い順</a>
 </div>
-<div class="btn-group" style= "margin-top: 100px;margin-left:10px">
-<button type="button" class="btn btn-outline-secondary">消去</button>
-</div>
+
 
 <div class="btn-group" style= "margin-top: 100px;margin-left:40px">
 <form action="ItemSearchResultServlet" method="post" class="form-inline mt-2 mt-md-0">
@@ -141,7 +185,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 <c:forEach var="item" items="${itemDataList}" >
 <div class="col-3">
 <div class="contar">
-<div class="card" style="height: 36rem;margin-top: 10px">
+<div class="card" style="height: 38rem;margin-top: 10px">
 
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -167,9 +211,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 </div>
 
 
-  <div class="card-body"><form action="ItemDetailServlet" method="post">
+  <div class="card-body" style="margin-top: 10px"><form action="ItemDetailServlet" method="post">
+  <p></p>
     <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${item.itemDetailId}"> ${item.itemName}</a></p>
-    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${item.itemDetailId}">${item.price}円</a></p>
+    <p class="card-text"><a href="ItemDetailServlet?itemDetailId=${item.itemDetailId}"><fmt:formatNumber value="${item.price}" pattern="###,###" />円</a></p>
     </form>
 
 
